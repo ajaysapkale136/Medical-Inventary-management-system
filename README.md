@@ -1,3 +1,8 @@
+## Deloyment Link:https://frontend-medi2.avdheshsahu038.workers.dev
+
+## Video Of Project prsentation link:https://drive.google.com/file/d/1GVKjgovCBcyBQFLASBVszaOE1WSFtE7L/view?usp=sharing
+
+
 # MediStock - Medical Inventory Management Platform
 
 Full-stack app: **Spring Boot (Java 17)** backend + **React 18 (Vite, Tailwind)** frontend.
