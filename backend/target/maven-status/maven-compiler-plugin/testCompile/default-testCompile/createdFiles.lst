@@ -1,0 +1,8 @@
+com\medistock\config\DataSeederTest.class
+com\medistock\service\CategoryServiceTest.class
+com\medistock\service\SupplierServiceTest.class
+com\medistock\MedicineServiceTest.class
+com\medistock\security\CustomUserDetailsServiceTest.class
+com\medistock\UserServiceRoleHierarchyTest.class
+com\medistock\service\SaleServiceTest.class
+com\medistock\security\JwtUtilTest.class

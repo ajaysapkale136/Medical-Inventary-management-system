@@ -1,0 +1,302 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-start: #abcac1;
+  --bg-end: #d5e1de;
+  --sidebar-bg: #0d3d36;
+  --panel-bg: rgba(234, 247, 239, 0.94);
+  --card-bg: #4db776;
+
+  /* Accents */
+  --accent: #7ac5a8;
+  --accent-soft: rgba(21, 155, 104, 0.12);
+  --accent-secondary: #2f7b67;
+
+  /* Text */
+  --text-main: #010000;
+  --text-muted: #3c4d47;
+  --text-link: #28c090;
+}
+
+:root[data-theme='light'] {
+  --bg-start: #e9f0ee;
+  --bg-end: #72a296;
+  --sidebar-bg: #073d35;
+  --panel-bg: rgba(234, 247, 239, 0.92);
+  --card-bg: #A8D5BA;
+
+  /* Accents */
+  --accent: #159b68;
+  --accent-soft: rgba(21, 155, 104, 0.12);
+  --accent-secondary: #2f7b67;
+
+  /* Text */
+  --text-main: #000000;
+  --text-muted: #3f514b;
+  --text-link: #0c6548;
+}
+
+:root[data-theme='dark'] {
+  --bg-start: #0b2420;
+  --bg-end: #123b33;
+  --sidebar-bg: #062d27;
+  --panel-bg: rgba(16, 48, 42, 0.96);
+  --card-bg: #A8D5BA;
+  --accent: #35c98a;
+  --accent-soft: rgba(53, 201, 138, 0.16);
+  --accent-secondary: #73b8a2;
+  --text-main: #eef8f3;
+  --text-muted: #adc7be;
+  --text-link: #74e7b5;
+}
+
+body {
+  @apply min-h-screen;
+  background-image: radial-gradient(circle at top right, rgba(204, 222, 217, 0.72), transparent 36%),
+    linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  color: var(--text-main);
+}
+
+.muted-text { color: var(--text-muted); }
+
+/* Compact mode */
+body.compact-mode .card,
+body.compact-mode .panel,
+body.compact-mode .rounded-3xl,
+body.compact-mode .rounded-2xl {
+  padding: 0.85rem !important;
+}
+
+/* Surfaces */
+.card {
+  @apply rounded-2xl border p-5 shadow-lg;
+  border-color: rgba(18, 56, 47, 0.08);
+  box-shadow: 0 12px 28px rgba(21, 53, 46, 0.08);
+  background-color: var(--card-bg);
+  /* Cards keep a light surface in every theme, so their content stays dark. */
+  --text-main: #050505;
+  --text-muted: #294139;
+}
+
+.panel {
+  @apply rounded-3xl border p-6 shadow-lg;
+  border-color: rgba(18, 56, 47, 0.08);
+  box-shadow: 0 12px 28px rgba(21, 53, 46, 0.08);
+  background-color: var(--panel-bg);
+}
+
+.sidebar-surface {
+  background-color: var(--sidebar-bg);
+}
+
+.navbar-surface {
+  background-color: var(--sidebar-bg);
+  color: white;
+}
+
+.navbar-surface .muted-text {
+  color: #d7efe0;
+}
+
+.navbar-surface .text-\[var\(--text-main\)\] {
+  color: rgb(73, 162, 91);
+}
+
+/* Buttons */
+.accent-btn,
+.btn-primary {
+  @apply inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition;
+  background-color: var(--accent);
+  color: white;
+}
+.accent-btn:hover,
+.btn-primary:hover {
+  background-color: #0f8056;
+}
+
+.btn-outline {
+  @apply inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition;
+  border-color: rgba(21, 155, 104, 0.25);
+  background-color: white;
+  color: var(--text-main);
+}
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-danger {
+  @apply inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition;
+  background-color: #d02222;
+  color: rgb(136, 82, 82);
+}
+.btn-danger:hover {
+  background-color: #b91c1c;
+}
+
+/* Inputs */
+.input {
+  @apply w-full rounded-lg border px-3 py-2 text-sm outline-none;
+  border-color: rgba(21, 155, 104, 0.2);
+  background-color: white;
+  color: var(--text-main);
+}
+
+/* Labels */
+.label {
+  @apply mb-1 block text-xs font-semibold uppercase tracking-wide;
+  color: var(--text-muted);
+}
+
+/* Badges (status indicators) */
+.badge {
+  @apply inline-block rounded-full px-2 py-0.5 text-xs font-semibold;
+}
+.badge-success { background-color: var(--accent); color: white; }
+.badge-warning { background-color: #464443; color: white; }
+.badge-danger { background-color: #dc2626; color: white; }
+.badge-info { background-color: var(--accent-secondary); color: white; }
+
+/* High-contrast stock and expiry alerts remain clear against every page surface. */
+.notification-row {
+  border-color: rgba(18, 56, 47, 0.12);
+  border-left: 4px solid transparent;
+  padding-left: 0.75rem;
+}
+.notification-badge,
+.stock-badge {
+  border: 1px solid transparent;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+}
+.notification-warning { border-left-color: #b45309; }
+.notification-warning .notification-badge,
+.stock-badge-warning {
+  background-color: #fef3c7;
+  border-color: #d97706;
+  color: #78350f;
+}
+.notification-danger { border-left-color: #dc2626; }
+.notification-danger .notification-badge,
+.stock-badge-danger {
+  background-color: #fee2e2;
+  border-color: #dc2626;
+  color: #991b1b;
+}
+.notification-success .notification-badge,
+.stock-badge-success {
+  background-color: #dcfce7;
+  border-color: #16a34a;
+  color: #166534;
+}
+.notification-neutral .notification-badge,
+.stock-badge-neutral {
+  background-color: #e2e8f0;
+  border-color: #64748b;
+  color: #334155;
+}
+
+:root[data-theme='dark'] .notification-row { border-color: rgba(226, 245, 237, 0.16); }
+:root[data-theme='dark'] .notification-warning .notification-badge,
+:root[data-theme='dark'] .stock-badge-warning { background-color: #78350f; border-color: #fbbf24; color: #fef3c7; }
+:root[data-theme='dark'] .notification-danger .notification-badge,
+:root[data-theme='dark'] .stock-badge-danger { background-color: #7f1d1d; border-color: #f87171; color: #fee2e2; }
+:root[data-theme='dark'] .notification-success .notification-badge,
+:root[data-theme='dark'] .stock-badge-success { background-color: #14532d; border-color: #4ade80; color: #dcfce7; }
+:root[data-theme='dark'] .notification-neutral .notification-badge,
+:root[data-theme='dark'] .stock-badge-neutral { background-color: #334155; border-color: #94a3b8; color: #f1f5f9; }
+
+/* Text utilities */
+.text-muted { color: var(--text-muted); }
+.accent-link { color: var(--text-link); }
+.accent-link:hover { color: #95ffc4; }
+.accent-text { color: var(--accent); }
+.highlight-text { color: var(--accent-secondary); }
+
+/* Accent surfaces */
+.accent-surface { background-color: var(--accent-soft); }
+
+/* Toggle */
+.toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 52px;
+  height: 30px;
+  border-radius: 9999px;
+  border: 1px solid rgba(21, 155, 104, 0.25);
+  background: rgba(148, 163, 184, 0.35);
+  transition: all 0.2s ease;
+}
+.toggle.on {
+  background: rgba(21, 155, 104, 0.3);
+  border-color: rgba(21, 155, 104, 0.5);
+}
+.toggle-thumb {
+  position: absolute;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgb(141, 98, 98);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+.toggle.on .toggle-thumb {
+  transform: translateX(22px);
+  background: var(--accent);
+}
+
+/* Reference palette bridge for the existing Tailwind utility surfaces. */
+[class*='bg-[rgba(8,25,23'],
+[class*='bg-[rgba(12,38,36'] {
+  background-color: rgba(234, 247, 239, 0.96) !important;
+}
+
+[class*='bg-[linear-gradient'] {
+  background-image: linear-gradient(135deg, rgba(234, 247, 239, 0.98), rgba(244, 251, 247, 0.98)) !important;
+}
+
+/* Standard white utility surfaces are warmed to the same light green-white card color. */
+body .bg-white { background-color: #eaf7ef !important; }
+
+:root[data-theme='dark'] [class*='bg-[rgba(8,25,23'],
+:root[data-theme='dark'] [class*='bg-[rgba(12,38,36'],
+:root[data-theme='dark'] [class*='bg-[rgba(255,255'] ,
+:root[data-theme='dark'] body .bg-white {
+  background-color: rgba(12, 40, 35, 0.98) !important;
+}
+
+:root[data-theme='dark'] [class*='bg-[linear-gradient'] {
+  background-image: linear-gradient(135deg, rgba(20, 67, 57, 0.98), rgba(12, 40, 35, 0.98)) !important;
+}
+
+:root[data-theme='dark'] [class*='border-white/10'],
+:root[data-theme='dark'] [class*='border-[rgba(255,255,255'] {
+  border-color: rgba(226, 245, 237, 0.12) !important;
+}
+
+:root[data-theme='dark'] .input {
+  background-color: rgba(7, 32, 28, 0.9);
+  border-color: rgba(53, 201, 138, 0.28);
+  color: var(--text-main);
+}
+
+:root[data-theme='dark'] .btn-outline {
+  background-color: rgba(7, 32, 28, 0.82);
+  color: var(--text-main);
+}
+
+[class*='border-white/10'],
+[class*='border-[rgba(255,255,255'] {
+  border-color: rgba(18, 56, 47, 0.09) !important;
+}
+
+/* All content text stays dark on the light surfaces. White is reserved for high-contrast actions and the dark navigation. */
+body .text-white { color: var(--text-main) !important; }
+.btn-primary, .accent-btn, .btn-danger { color: white !important; }
+:root[data-theme='dark'] body .text-white { color: var(--text-main) !important; }
+.sidebar-surface .text-white,
+.sidebar-surface .hover\\:text-white:hover { color: white; }

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.medistock.config.DataSeederTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.087 s -- in com.medistock.config.DataSeederTest
