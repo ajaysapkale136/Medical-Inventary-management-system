@@ -76,6 +76,7 @@ public class SessionAuthInterceptor implements HandlerInterceptor {
                 || path.startsWith("/api/inventory/transfer")
                 || path.startsWith("/api/staff/notifications/")
                 || path.startsWith("/api/notifications/")
+                || path.startsWith("/api/preferences")
                 || path.startsWith("/api/staff/orders/")
                 || path.startsWith("/api/staff/reports/generate")
                 || path.startsWith("/api/transfers")

@@ -102,7 +102,7 @@ const Auth = () => {
           {!isLogin && role === 'admin' && (
             <div className="input-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-              <input name="securityToken" value={form.securityToken} onChange={updateField} type="password" placeholder="Admin Security Token (default: change-me)" required />
+              <input name="securityToken" value={form.securityToken} onChange={updateField} type="password" placeholder="Admin bootstrap token" required />
             </div>
           )}
           {!isLogin && role === 'pharmacist' && (
@@ -128,54 +128,7 @@ const Auth = () => {
             {submitting ? 'Please wait...' : isLogin ? 'Login' : 'Register'}
           </button>
 
-          {isLogin && (
-            <div className="demo-credentials-bar">
-              <span className="demo-label">Quick Demo Sign-In:</span>
-              <div className="demo-btn-group">
-                <button type="button" className="demo-pill" onClick={() => {
-                  setRole('admin');
-                  setForm((prev) => ({ ...prev, email: 'admin@medistock.com', password: 'Admin@1234' }));
-                }}>Admin</button>
-                <button type="button" className="demo-pill" onClick={() => {
-                  setRole('pharmacist');
-                  setForm((prev) => ({ ...prev, email: 'pharmacist@medistock.com', password: 'Pharma@1234' }));
-                }}>Pharmacist</button>
-                <button type="button" className="demo-pill" onClick={() => {
-                  setRole('staff');
-                  setForm((prev) => ({ ...prev, email: 'staff@medistock.com', password: 'Staff@1234' }));
-                }}>Staff</button>
-              </div>
-            </div>
-          )}
         </form>
-
-        {/* Hospital Enterprise SSO */}
-        {isLogin && (
-          <div className="social-login-area">
-            <div className="or-divider">
-              <span>HOSPITAL WORKSPACE SSO</span>
-            </div>
-            
-            <button 
-              type="button" 
-              className="ice-matte-submit-btn" 
-              style={{ 
-                marginTop: '1rem', 
-                background: 'rgba(255, 255, 255, 0.04)', 
-                border: '1px solid rgba(144, 224, 239, 0.25)', 
-                color: '#CAF0F8',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px'
-              }}
-              onClick={() => setMessage('Hospital Enterprise SSO (SAML 2.0 / Active Directory) is available in production clusters.')}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              <span>Single Sign-On (Active Directory)</span>
-            </button>
-          </div>
-        )}
 
       </div>
     </div>

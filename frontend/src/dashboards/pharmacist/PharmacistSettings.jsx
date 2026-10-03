@@ -4,18 +4,18 @@ import { apiRequest } from "../../lib/api";
 import "./PharmacistSettings.css";
 
 const API_URL = "/api/auth/profile";
-const STORAGE_KEY = "medistock.pharmacist.profile";
+const PREFERENCES_API_URL = "/api/preferences";
 
 const defaultProfile = {
-  fullName: "Priya Mehta",
-  employeeId: "PHR-2048",
-  email: "priya.mehta@citycarepharmacy.com",
-  phone: "+91 97654 32109",
-  branch: "Mumbai Central Pharmacy",
-  licenseNumber: "MH-PH-77421",
+  fullName: "",
+  employeeId: "",
+  email: "",
+  phone: "",
+  branch: "",
+  licenseNumber: "",
   shift: "Morning Shift",
   specialization: "Inventory and Dispensing",
-  address: "42, Health Avenue, Mumbai, Maharashtra",
+  address: "",
   lowStockThreshold: 25,
   expiryAlertDays: 30,
   emailNotifications: true,
@@ -26,29 +26,28 @@ const defaultProfile = {
 const PharmacistSettings = () => {
   const [activeTab, setActiveTab] = useState("Profile");
   const [profile, setProfile] = useState(defaultProfile);
-  const [status, setStatus] = useState("Local draft ready");
+  const [status, setStatus] = useState("Loading saved settings...");
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      setProfile({ ...defaultProfile, ...JSON.parse(saved) });
-    }
-
     const fetchProfile = async () => {
       try {
-        const data = await apiRequest(API_URL);
+        const [data, preferences] = await Promise.all([
+          apiRequest(API_URL),
+          apiRequest(PREFERENCES_API_URL),
+        ]);
         setProfile((current) => ({
-          ...current,
+          ...defaultProfile,
+          ...preferences,
           fullName: data.name || current.fullName,
           email: data.email || current.email,
           phone: data.phone || "",
           branch: data.location || "",
           specialization: data.department || "",
         }));
-        setStatus("Loaded from backend profile API");
+        setStatus("Saved settings loaded");
       } catch (error) {
-        setStatus(error.message || "Using local profile until backend API is available");
+        setStatus(error.message || "Settings could not be loaded");
       }
     };
 
@@ -65,10 +64,9 @@ const PharmacistSettings = () => {
 
   const saveProfile = async () => {
     setSaving(true);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
-
     try {
-      await apiRequest(API_URL, {
+      await Promise.all([
+        apiRequest(API_URL, {
         method: "PUT",
         body: {
           name: profile.fullName,
@@ -76,7 +74,9 @@ const PharmacistSettings = () => {
           department: profile.specialization,
           location: profile.branch,
         },
-      });
+        }),
+        apiRequest(PREFERENCES_API_URL, { method: "PUT", body: profile }),
+      ]);
 
       setStatus("Profile saved to backend");
     } catch (error) {

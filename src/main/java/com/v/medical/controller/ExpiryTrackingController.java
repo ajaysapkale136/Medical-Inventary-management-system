@@ -14,7 +14,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/expiry")
-@CrossOrigin(origins = "http://localhost:3000")
 public class ExpiryTrackingController {
 
     private final ExpiryTrackingService

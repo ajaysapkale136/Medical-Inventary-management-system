@@ -8,7 +8,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/medicines")
-@CrossOrigin(origins = "http://localhost:3000")
 public class BarcodeScanController {
 
     private final BarcodeScanService barcodeScanService;

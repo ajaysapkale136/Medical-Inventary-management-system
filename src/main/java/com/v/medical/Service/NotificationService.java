@@ -162,9 +162,6 @@ public class NotificationService {
                                 NotificationStatus.NEW
                         );
 
-        LocalDateTime now =
-                LocalDateTime.now();
-
         for (Notification notification :
                 notifications) {
 

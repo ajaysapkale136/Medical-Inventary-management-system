@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/inventory/analytics")
-@CrossOrigin(origins = "http://localhost:3000")
 public class InventoryAnalyticsController {
 
     private final InventoryAnalyticsService

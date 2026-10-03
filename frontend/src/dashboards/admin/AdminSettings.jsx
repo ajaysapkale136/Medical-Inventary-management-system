@@ -6,34 +6,33 @@ import "./AdminSettings.css";
 
 const SETTINGS_API_URL = "/api/system-settings";
 const PROFILE_API_URL = "/api/auth/profile";
-const SETTINGS_STORAGE_KEY = "medistock.admin.settings";
-const PROFILE_STORAGE_KEY = "medistock.admin.profile";
+const PREFERENCES_API_URL = "/api/preferences";
 
 const defaultSystemSettings = {
-  orgName: "City Care Pharmacy",
-  email: "info@citycarepharmacy.com",
-  phone: "+91 98765 43210",
-  address: "123, Health Street, Medical District, Mumbai, Maharashtra - 400001",
+  orgName: "",
+  email: "",
+  phone: "",
+  address: "",
   timezone: "Asia/Kolkata (GMT +05:30)",
   dateFormat: "DD-MM-YYYY",
   currency: "INR",
   language: "English",
   lowStock: 10,
   expiryAlert: 30,
-  warehouse: "Main Warehouse",
+  warehouse: "",
   emailNotif: true,
   smsNotif: true,
   pushNotif: true,
 };
 
 const defaultProfile = {
-  fullName: "Ajay Sharma",
-  adminId: "ADM-1001",
-  email: "ajay.sharma@citycarepharmacy.com",
-  phone: "+91 98765 43210",
-  location: "Head Office - Pune",
+  fullName: "",
+  adminId: "",
+  email: "",
+  phone: "",
+  location: "",
   accessLevel: "System Administrator",
-  address: "Head Office, Pune, Maharashtra",
+  address: "",
 };
 
 const modules = [
@@ -50,34 +49,30 @@ const AdminSettings = () => {
   const [activeTab, setActiveTab] = useState("My Profile");
   const [systemSettings, setSystemSettings] = useState(defaultSystemSettings);
   const [profile, setProfile] = useState(defaultProfile);
-  const [status, setStatus] = useState("Local draft ready");
+  const [status, setStatus] = useState("Loading saved settings...");
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    const savedSettings = localStorage.getItem(SETTINGS_STORAGE_KEY);
-    const savedProfile = localStorage.getItem(PROFILE_STORAGE_KEY);
-
-    if (savedSettings) setSystemSettings({ ...defaultSystemSettings, ...JSON.parse(savedSettings) });
-    if (savedProfile) setProfile({ ...defaultProfile, ...JSON.parse(savedProfile) });
-
     const fetchInitialData = async () => {
       try {
-        const [settingsData, profileData] = await Promise.all([
+        const [settingsData, profileData, preferencesData] = await Promise.all([
           apiRequest(SETTINGS_API_URL),
           apiRequest(PROFILE_API_URL),
+          apiRequest(PREFERENCES_API_URL),
         ]);
         setSystemSettings({ ...defaultSystemSettings, ...settingsData });
         setProfile((current) => ({
-          ...current,
+          ...defaultProfile,
+          ...preferencesData,
           fullName: profileData.name || current.fullName,
           email: profileData.email || current.email,
           phone: profileData.phone || "",
           location: profileData.location || "",
           address: profileData.department || "",
         }));
-        setStatus("Loaded from backend settings API");
+        setStatus("Saved settings loaded");
       } catch (error) {
-        setStatus(error.message || "Using local settings until backend APIs are available");
+        setStatus(error.message || "Settings could not be loaded");
       }
     };
 
@@ -99,9 +94,6 @@ const AdminSettings = () => {
 
   const saveChanges = async () => {
     setSaving(true);
-    localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(systemSettings));
-    localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profile));
-
     try {
       await Promise.all([
         apiRequest(SETTINGS_API_URL, {
@@ -117,10 +109,14 @@ const AdminSettings = () => {
             location: profile.location,
           },
         }),
+        apiRequest(PREFERENCES_API_URL, {
+          method: "PUT",
+          body: profile,
+        }),
       ]);
       setStatus("Settings saved to backend");
     } catch (error) {
-      setStatus(error.message || "Saved locally. Backend rejected the update.");
+      setStatus(error.message || "Settings could not be saved");
     } finally {
       setSaving(false);
     }

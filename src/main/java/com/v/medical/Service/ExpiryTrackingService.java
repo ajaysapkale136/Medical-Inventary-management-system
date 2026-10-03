@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,18 +17,12 @@ public class ExpiryTrackingService {
     private final ExpiryTrackingRepository
             expiryRepository;
 
-    private final NotificationService
-            notificationService;
-
     public ExpiryTrackingService(
             ExpiryTrackingRepository expiryRepository,
             NotificationService notificationService) {
 
         this.expiryRepository =
                 expiryRepository;
-
-        this.notificationService =
-                notificationService;
     }
 
     // ==========================================
@@ -41,9 +34,9 @@ public class ExpiryTrackingService {
         List<ExpiryTracking> records =
                 expiryRepository.findAll();
 
-        records.forEach(
-                ExpiryTracking::calculateStatus
-        );
+        for (ExpiryTracking record : records) {
+            record.calculateStatus();
+        }
 
         return records;
     }
@@ -134,9 +127,9 @@ public class ExpiryTrackingService {
                                 medicineName
                         );
 
-        records.forEach(
-                ExpiryTracking::calculateStatus
-        );
+        for (ExpiryTracking record : records) {
+            record.calculateStatus();
+        }
 
         return records;
     }
@@ -152,9 +145,9 @@ public class ExpiryTrackingService {
                 expiryRepository
                         .findByStatus(status);
 
-        records.forEach(
-                ExpiryTracking::calculateStatus
-        );
+        for (ExpiryTracking record : records) {
+            record.calculateStatus();
+        }
 
         return records;
     }
@@ -179,9 +172,9 @@ public class ExpiryTrackingService {
                                 future
                         );
 
-        records.forEach(
-                ExpiryTracking::calculateStatus
-        );
+        for (ExpiryTracking record : records) {
+            record.calculateStatus();
+        }
 
         return records;
     }
@@ -199,9 +192,9 @@ public class ExpiryTrackingService {
                                 LocalDate.now()
                         );
 
-        records.forEach(
-                ExpiryTracking::calculateStatus
-        );
+        for (ExpiryTracking record : records) {
+            record.calculateStatus();
+        }
 
         return records;
     }
@@ -222,9 +215,9 @@ public class ExpiryTrackingService {
                                 to
                         );
 
-        records.forEach(
-                ExpiryTracking::calculateStatus
-        );
+        for (ExpiryTracking record : records) {
+            record.calculateStatus();
+        }
 
         return records;
     }

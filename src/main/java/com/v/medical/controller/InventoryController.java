@@ -12,7 +12,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/inventory")
-@CrossOrigin(origins = "http://localhost:3000")
 public class InventoryController {
 
     private final InventoryService inventoryService;

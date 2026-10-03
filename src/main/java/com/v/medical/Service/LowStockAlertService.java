@@ -35,9 +35,9 @@ public class LowStockAlertService {
         List<LowStockAlert> alerts =
                 alertRepository.findAll();
 
-        alerts.forEach(
-                LowStockAlert::calculateStatus
-        );
+        for (LowStockAlert alert : alerts) {
+            alert.calculateStatus();
+        }
 
         return alerts;
     }

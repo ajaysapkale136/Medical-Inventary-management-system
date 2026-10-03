@@ -12,7 +12,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/transfers")
-@CrossOrigin(origins = "http://localhost:3000")
 public class StockTransferController {
 
     private final StockTransferService stockTransferService;

@@ -13,7 +13,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/low-stock-alerts")
-@CrossOrigin(origins = "http://localhost:3000")
 public class LowStockAlertController {
 
     private final LowStockAlertService alertService;
