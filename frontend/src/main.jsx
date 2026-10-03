@@ -1,21 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+// import React from 'react'
+// import ReactDOM from 'react-dom/client'
+// import Home from './Home.jsx' // <-- Now importing Home instead of App
 
-const savedSettings = localStorage.getItem('medistock-settings')
-if (savedSettings) {
-  try {
-    const { darkMode, compactMode } = JSON.parse(savedSettings)
-    document.documentElement.dataset.theme = darkMode ? 'dark' : 'light'
-    document.body.classList.toggle('compact-mode', Boolean(compactMode))
-  } catch {
-    document.documentElement.dataset.theme = 'light'
-  }
-}
+// ReactDOM.createRoot(document.getElementById('root')).render(
+//   <React.StrictMode>
+//     <Home /> {/* <-- Now rendering Home */}
+//   </React.StrictMode>,
+// )
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
-)
+);

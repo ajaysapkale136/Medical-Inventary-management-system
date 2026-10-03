@@ -1,0 +1,176 @@
+/* --- 5-COLUMN SUMMARY GRID --- */
+.alerts-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+}
+
+/* --- MAIN VERTICAL LAYOUT (Full Width) --- */
+.alerts-main-split {
+  display: grid;
+  grid-template-columns: 1fr; /* Forces a single, full-width column */
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* --- BOTTOM VERTICAL LAYOUT (Full Width) --- */
+.alerts-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Forces a single, full-width column */
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* --- ALERT SPECIFIC BADGES --- */
+.priority-badge {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+  display: inline-block;
+  min-width: 70px;
+}
+.priority-critical { background: rgba(244, 63, 94, 0.15); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.3); }
+.priority-warning { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+.priority-info { background: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3); }
+
+.status-text {
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+.status-new { color: #f43f5e; }
+.status-ack { color: #3b82f6; }
+.status-resolved { color: #10b981; }
+
+/* --- ALERT DETAILS PANEL --- */
+.alert-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(144, 224, 239, 0.1);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.alert-detail-title {
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin: 0 0 5px 0;
+}
+
+.alert-detail-group {
+  margin-bottom: 12px;
+}
+.alert-detail-label {
+  font-size: 0.75rem;
+  color: #94A3B8;
+  margin-bottom: 3px;
+  display: block;
+}
+.alert-detail-value {
+  font-size: 0.85rem;
+  color: #CAF0F8;
+}
+
+.alert-detail-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 1.5rem;
+  border-top: 1px solid rgba(144, 224, 239, 0.1);
+  padding-top: 1rem;
+}
+
+.btn-group-row {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-group-row button {
+  flex: 1;
+}
+
+/* --- SIDEBAR LISTS --- */
+.recent-alerts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.recent-alert-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.recent-alert-dot {
+  width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0;
+}
+.recent-alert-content h4 { margin: 0; font-size: 0.85rem; color: #CAF0F8; }
+.recent-alert-content p { margin: 0; font-size: 0.75rem; color: #94A3B8; }
+
+.settings-summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.settings-summary-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+}
+.settings-summary-label { color: #94A3B8; }
+.settings-summary-value { color: #CAF0F8; font-weight: 600; }
+
+.quick-actions-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.quick-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  color: #CAF0F8;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+.quick-action-btn:hover { color: #00B4D8; }
+.qa-icon {
+  width: 24px; height: 24px;
+  background: rgba(144, 224, 239, 0.1);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+@media screen and (max-width: 1500px) {
+  .alerts-stats-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+}
+
+@media screen and (max-width: 900px) {
+  .hide-mobile { display: none !important; }
+}
+
+/* Alerts Table Fix for Horizontal Layout & Wrapping */
+.alerts-main-split .table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.alerts-main-split .data-table {
+  width: 100%;
+  min-width: 750px;
+  border-collapse: collapse;
+}
+
+.alerts-main-split .data-table th,
+.alerts-main-split .data-table td {
+  padding: 12px 14px;
+  white-space: normal !important;
+  word-break: break-word;
+  line-height: 1.4;
+}

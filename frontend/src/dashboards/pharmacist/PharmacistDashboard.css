@@ -1,0 +1,601 @@
+/* ==========================================================================
+   PHARMACIST & CLINICAL OPERATIONS DASHBOARD - ULTRA PREMIUM THEME
+   ========================================================================== */
+
+.pharma-layout {
+  display: flex;
+  height: 100vh;
+  background-color: #030712;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #CAF0F8;
+}
+
+.pharma-sidebar {
+  width: 260px;
+  background: rgba(10, 25, 47, 0.7);
+  border-right: 1px solid rgba(144, 224, 239, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  backdrop-filter: blur(14px);
+}
+
+.pharma-logo {
+  padding: 1.5rem;
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(144, 224, 239, 0.1);
+  letter-spacing: -0.3px;
+}
+
+.pharma-logo span {
+  color: #00B4D8;
+}
+
+.nav-group {
+  margin-top: 1rem;
+}
+
+.nav-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748B;
+  padding: 1rem 1.4rem 0.4rem 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.8rem 1.4rem;
+  color: #94A3B8;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nav-item:hover {
+  background: rgba(144, 224, 239, 0.05);
+  color: #CAF0F8;
+}
+
+.nav-item.active {
+  background: rgba(0, 180, 216, 0.12);
+  color: #00B4D8;
+  border-left-color: #00B4D8;
+}
+
+.pharma-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pharma-header {
+  height: 70px;
+  background: rgba(3, 7, 18, 0.85);
+  border-bottom: 1px solid rgba(144, 224, 239, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  color: white;
+  backdrop-filter: blur(12px);
+}
+
+.pharma-search {
+  width: 380px;
+  height: 40px;
+  padding: 0 1.2rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(144, 224, 239, 0.18);
+  color: #F8FAFC;
+  outline: none;
+  font-size: 0.85rem;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.pharma-search::placeholder {
+  color: #64748B;
+}
+
+.pharma-search:focus {
+  border-color: #00B4D8;
+  box-shadow: 0 0 10px rgba(0, 180, 216, 0.25);
+}
+
+.pharma-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem 2rem;
+}
+
+/* --- DASHBOARD HEADER TITLE --- */
+.page-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.75rem;
+  gap: 1rem;
+}
+
+.page-title-row h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  margin: 0 0 4px 0;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #F8FAFC;
+  letter-spacing: -0.4px;
+}
+
+.page-title-row p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #94A3B8;
+}
+
+/* --- ULTRA PREMIUM GLASS CARD --- */
+.pharma-card {
+  background: linear-gradient(135deg, rgba(10, 25, 47, 0.6) 0%, rgba(3, 7, 18, 0.75) 100%);
+  border: 1px solid rgba(144, 224, 239, 0.12);
+  border-top: 1px solid rgba(144, 224, 239, 0.28);
+  border-radius: 14px;
+  padding: 1.4rem;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: all 0.2s ease;
+}
+
+.pharma-card:hover {
+  border-color: rgba(0, 180, 216, 0.25);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 180, 216, 0.08);
+}
+
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(144, 224, 239, 0.1);
+  padding-bottom: 0.8rem;
+}
+
+.card-header-row h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #F8FAFC;
+  letter-spacing: -0.2px;
+}
+
+.card-header-row h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #F8FAFC;
+}
+
+.card-link {
+  font-size: 0.78rem;
+  color: #00B4D8;
+  text-decoration: none;
+  font-weight: 600;
+  background: rgba(0, 180, 216, 0.08);
+  border: 1px solid rgba(0, 180, 216, 0.25);
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.card-link:hover {
+  background: #00B4D8;
+  color: #030712;
+  box-shadow: 0 0 12px rgba(0, 180, 216, 0.3);
+  text-decoration: none;
+}
+
+/* --- SUMMARY GRID CARDS --- */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+  min-width: 0;
+}
+
+.summary-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 1.3rem;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(10, 25, 47, 0.65) 0%, rgba(3, 7, 18, 0.8) 100%);
+  border: 1px solid rgba(144, 224, 239, 0.12);
+  border-top: 1px solid rgba(144, 224, 239, 0.28);
+  width: 100%;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.summary-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 180, 216, 0.5), transparent);
+}
+
+.summary-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(144, 224, 239, 0.15);
+  flex-shrink: 0;
+}
+
+.summary-info h4 {
+  margin: 0 0 4px 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #94A3B8;
+}
+
+.summary-info h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  margin: 0 0 4px 0;
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #F8FAFC;
+}
+
+.summary-info p {
+  margin: 0;
+  font-size: 0.76rem;
+  color: #90E0EF;
+  font-weight: 500;
+}
+
+/* STACKED GRIDS */
+.row-2-grid,
+.row-3-grid,
+.row-4-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  min-width: 0;
+}
+
+.clickable-card {
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  appearance: none;
+}
+
+.clickable-card:hover,
+.clickable-card:focus-visible {
+  border-color: rgba(0, 180, 216, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 180, 216, 0.15);
+  outline: none;
+}
+
+/* --- CHARTS --- */
+.analytics-chart {
+  min-height: 200px;
+  border: 1px solid rgba(144, 224, 239, 0.14);
+  border-radius: 10px;
+  background:
+    linear-gradient(rgba(144, 224, 239, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(144, 224, 239, 0.03) 1px, transparent 1px);
+  background-size: 100% 25%, 12.5% 100%;
+  overflow: hidden;
+}
+
+.pharmacist-chart.tall {
+  min-height: 250px;
+}
+
+.line-analytics {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+  padding: 18px;
+}
+
+.line-analytics span {
+  flex: 1;
+  min-width: 12px;
+  border-radius: 6px 6px 0 0;
+  background: linear-gradient(180deg, #90E0EF 0%, #00B4D8 100%);
+  box-shadow: 0 0 16px rgba(0, 180, 216, 0.35);
+  transition: all 0.3s ease;
+}
+
+.line-analytics span:hover {
+  background: linear-gradient(180deg, #CAF0F8 0%, #38BDF8 100%);
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.6);
+  transform: scaleY(1.05);
+}
+
+.donut-analytics {
+  min-height: 200px;
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.donut-ring {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: conic-gradient(#10B981 0 64%, #F59E0B 64% 87%, #00B4D8 87% 100%);
+  position: relative;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+}
+
+.donut-ring::after {
+  content: "";
+  position: absolute;
+  inset: 32px;
+  border-radius: 50%;
+  background: #0B1120;
+  border: 1px solid rgba(144, 224, 239, 0.14);
+}
+
+.donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #CAF0F8;
+  font-size: 0.85rem;
+}
+
+.donut-legend span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.donut-legend b {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.legend-green { background: #10B981; box-shadow: 0 0 8px rgba(16, 185, 129, 0.4); }
+.legend-orange { background: #F59E0B; box-shadow: 0 0 8px rgba(245, 158, 11, 0.4); }
+.legend-blue { background: #00B4D8; box-shadow: 0 0 8px rgba(0, 180, 216, 0.4); }
+
+/* --- QUICK ACTIONS --- */
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.qa-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(144, 224, 239, 0.15);
+  border-radius: 10px;
+  color: #CAF0F8;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.qa-btn:hover {
+  background: rgba(0, 180, 216, 0.12);
+  border-color: #00B4D8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 180, 216, 0.2);
+}
+
+.qa-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* --- ALERTS & ACTIVITIES LIST --- */
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.list-content h4 {
+  margin: 0 0 2px 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.list-content p {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.list-meta {
+  font-size: 0.72rem;
+  color: #64748B;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* --- LIGHT TABLE STYLING --- */
+.table-light {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-light th {
+  padding: 12px 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(144, 224, 239, 0.12);
+  background: rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+.table-light td {
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: #CAF0F8;
+  vertical-align: middle;
+}
+
+.table-light tbody tr:hover {
+  background: rgba(144, 224, 239, 0.035);
+}
+
+/* --- STATUS PILLS --- */
+.status-pill {
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.pill-green { 
+  background: rgba(16, 185, 129, 0.15); 
+  color: #34D399; 
+  border: 1px solid rgba(16, 185, 129, 0.35); 
+}
+
+.pill-blue { 
+  background: rgba(0, 180, 216, 0.15); 
+  color: #38BDF8; 
+  border: 1px solid rgba(0, 180, 216, 0.35); 
+}
+
+.pill-orange { 
+  background: rgba(245, 158, 11, 0.15); 
+  color: #FBBF24; 
+  border: 1px solid rgba(245, 158, 11, 0.35); 
+}
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+@media screen and (max-width: 1100px) {
+  .staff-dashboard-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .staff-dashboard-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .page-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .donut-analytics {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .summary-grid,
+  .staff-dashboard-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-box,
+  .pharma-card {
+    padding: 1rem;
+  }
+
+  .quick-actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .table-light {
+    min-width: 520px;
+  }
+}

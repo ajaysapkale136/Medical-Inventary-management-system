@@ -1,0 +1,55 @@
+@import "../admin/AdminSettings.css";
+
+.role-settings .glass-panel {
+  border-color: rgba(0, 180, 216, 0.16);
+}
+
+.role-settings-status {
+  margin: 1rem 0 1.4rem;
+  color: #94A3B8;
+  font-size: 0.85rem;
+}
+
+.two-column-settings {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tab-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+.settings-toggle-row {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(144, 224, 239, 0.14);
+  border-radius: 8px;
+  color: #caf0f8;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.settings-toggle-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: #00b4d8;
+}
+
+.settings-empty-state {
+  color: #94A3B8;
+  border: 1px dashed rgba(144, 224, 239, 0.22);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+@media screen and (max-width: 900px) {
+  .two-column-settings {
+    grid-template-columns: 1fr;
+  }
+}

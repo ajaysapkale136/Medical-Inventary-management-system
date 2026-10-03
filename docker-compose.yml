@@ -1,22 +1,33 @@
-version: "3.8"
+version: '3.9'
+
 services:
+  app:
+    build:
+      context: .
+    container_name: medical-inventory-app
+    ports:
+      - "8080:8080"
+    environment:
+      SERVER_ADDRESS: 0.0.0.0
+      PORT: 8080
+      DB_URL: jdbc:mysql://db:3306/medical_inventory
+      DB_USERNAME: root
+      DB_PASSWORD: 1234
+      ADMIN_BOOTSTRAP_TOKEN: change-me
+    depends_on:
+      - db
+
   db:
-    image: mysql:8
+    image: mysql:8.0
+    container_name: medical-inventory-db
+    restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: medistock
-    ports: ["3306:3306"]
+      MYSQL_DATABASE: medical_inventory
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
 
-  backend:
-    build: ./backend
-    depends_on: [db]
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/medistock?useSSL=false&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-    ports: ["8080:8080"]
-
-  frontend:
-    build: ./frontend
-    depends_on: [backend]
-    ports: ["5173:80"]
+volumes:
+  mysql_data:

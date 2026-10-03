@@ -1,0 +1,109 @@
+/* --- 4-COLUMN SUMMARY GRID --- */
+.reports-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+/* --- 8-COLUMN CATEGORIES GRID --- */
+.reports-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.report-cat-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(144, 224, 239, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.report-cat-card:hover {
+  background: rgba(144, 224, 239, 0.05);
+  border-color: #00B4D8;
+}
+
+.cat-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.cat-info h4 { margin: 0; font-size: 0.85rem; color: #CAF0F8; }
+.cat-info p { margin: 0; font-size: 0.75rem; color: #94A3B8; }
+
+/* --- MAIN VERTICAL LAYOUT (Full Width) --- */
+.reports-main-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* --- PREVIEW METRICS --- */
+.preview-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.preview-metric-box {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.preview-metric-box p { margin: 0 0 5px 0; font-size: 0.7rem; color: #94A3B8; }
+.preview-metric-box h4 { margin: 0; font-size: 1rem; color: #fff; }
+
+/* --- ALERTS ROW --- */
+.reports-alerts-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.report-alert-card {
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 3px solid transparent;
+  padding: 1rem;
+  border-radius: 6px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.report-alert-card.red { border-color: #f43f5e; }
+.report-alert-card.orange { border-color: #f59e0b; }
+.report-alert-card.blue { border-color: #3b82f6; }
+.report-alert-card.green { border-color: #10b981; }
+
+.report-alert-info h4 { margin: 0 0 4px 0; font-size: 0.85rem; color: #CAF0F8; }
+.report-alert-info p { margin: 0; font-size: 0.75rem; color: #94A3B8; }
+.report-alert-info a { display: block; margin-top: 8px; font-size: 0.75rem; color: #00B4D8; text-decoration: none; }
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+@media screen and (max-width: 1400px) {
+  .reports-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .preview-metrics { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media screen and (max-width: 1200px) {
+  .reports-main-split { grid-template-columns: 1fr; }
+}
+
+@media screen and (max-width: 900px) {
+  .hide-mobile { display: none !important; }
+}

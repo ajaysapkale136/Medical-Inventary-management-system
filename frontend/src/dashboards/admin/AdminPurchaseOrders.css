@@ -1,0 +1,95 @@
+/* --- 5-COLUMN SUMMARY GRID (Forced Single Row) --- */
+.po-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+}
+
+/* --- MAIN 75/25 SPLIT LAYOUT --- */
+.po-main-split {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  align-items: start;
+}
+
+.po-left-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.po-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* --- 4-COLUMN BOTTOM GRID --- */
+.po-bottom-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* --- SIDEBAR LISTS (Quick Actions & Alerts) --- */
+.action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-list-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #CAF0F8;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.action-list-item:hover {
+  color: #00B4D8;
+}
+
+.alert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.alert-list-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #94A3B8;
+  font-size: 0.85rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.dot.red { background: #f43f5e; }
+.dot.orange { background: #f59e0b; }
+.dot.blue { background: #3b82f6; }
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+@media screen and (max-width: 1500px) {
+  .po-stats-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .po-bottom-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media screen and (max-width: 1200px) {
+  .po-main-split { grid-template-columns: 1fr; }
+  .po-right-col { display: grid; grid-template-columns: 1fr 1fr; }
+}
+
+@media screen and (max-width: 900px) {
+  .po-right-col { grid-template-columns: 1fr; }
+  .po-bottom-grid { grid-template-columns: 1fr; }
+  .hide-mobile { display: none !important; }
+}

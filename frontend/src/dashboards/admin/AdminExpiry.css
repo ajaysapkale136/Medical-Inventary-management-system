@@ -1,0 +1,279 @@
+/* --- 5-COLUMN SUMMARY GRID (Forced Single Row) --- */
+.expiry-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+}
+
+/* --- MAIN 75/25 SPLIT LAYOUT --- */
+.expiry-main-split {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  align-items: start;
+}
+
+.expiry-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.expiry-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* --- CHARTS ROW (Inside Left Column) --- */
+.expiry-charts-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.expiry-charts-row .glass-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+/* Card 1: Expiry Overview Container */
+.expiry-overview-container {
+  width: 100%;
+  height: 165px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(10, 25, 47, 0.4);
+  border: 1px solid rgba(144, 224, 239, 0.12);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* Card 2: Expiry Trend Bar Chart */
+.expiry-trend-container {
+  width: 100%;
+  height: 165px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px 14px 8px;
+  background: rgba(10, 25, 47, 0.4);
+  border: 1px solid rgba(144, 224, 239, 0.12);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.expiry-trend-bars-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+  flex: 1;
+  width: 100%;
+  border-bottom: 1px solid rgba(144, 224, 239, 0.15);
+  padding-bottom: 4px;
+  box-sizing: border-box;
+}
+
+.expiry-trend-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  height: 100%;
+  gap: 4px;
+}
+
+.expiry-trend-val {
+  font-size: 0.72rem;
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+
+.expiry-trend-bar {
+  width: 100%;
+  max-width: 28px;
+  min-width: 14px;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s ease, filter 0.2s ease;
+  cursor: pointer;
+}
+
+.expiry-trend-col:hover .expiry-trend-bar {
+  filter: brightness(1.25);
+  transform: scaleY(1.04);
+}
+
+.expiry-trend-col:hover .expiry-trend-val {
+  transform: translateY(-2px);
+}
+
+.expiry-trend-labels-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding-top: 5px;
+  box-sizing: border-box;
+}
+
+.expiry-trend-label-item {
+  flex: 1;
+  text-align: center;
+  font-size: 0.72rem;
+  color: #94A3B8;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* Card 3: Top 5 Near Expiry Mini Table */
+.expiry-mini-table-container {
+  width: 100%;
+  height: 165px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(144, 224, 239, 0.12);
+  background: rgba(10, 25, 47, 0.4);
+  box-sizing: border-box;
+}
+
+.expiry-mini-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.78rem;
+}
+
+.expiry-mini-table th {
+  padding: 7px 8px;
+  color: #94A3B8;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(144, 224, 239, 0.15);
+  background: rgba(10, 25, 47, 0.7);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.expiry-mini-table td {
+  padding: 6px 8px;
+  color: #CAF0F8;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.expiry-mini-table tr:last-child td {
+  border-bottom: none;
+}
+
+.expiry-mini-table tr:hover td {
+  background: rgba(0, 180, 216, 0.08);
+}
+
+
+/* --- CALENDAR MOCK UI --- */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #CAF0F8;
+  font-weight: 600;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.calendar-day-name {
+  color: #94A3B8;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.calendar-day {
+  color: #ffffff;
+  padding: 4px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.calendar-day.expired { background: rgba(244, 63, 94, 0.8); }
+.calendar-day.near { background: rgba(245, 158, 11, 0.8); }
+.calendar-day.safe { background: rgba(34, 197, 94, 0.8); }
+
+/* --- ALERT SETTINGS TOGGLES --- */
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  color: #CAF0F8;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 36px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9px;
+  cursor: pointer;
+}
+.toggle-switch.active { background: #4ade80; }
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 14px; height: 14px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+.toggle-switch.active::after { left: 20px; }
+
+/* --- ALERT SUMMARY LIST --- */
+.alert-summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+  font-size: 0.85rem;
+}
+.alert-summary-item:last-child { border-bottom: none; }
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+@media screen and (max-width: 1500px) {
+  .expiry-stats-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+}
+
+@media screen and (max-width: 1200px) {
+  .expiry-main-split { grid-template-columns: 1fr; }
+  .expiry-charts-row { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  .expiry-right-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+}
+
+@media screen and (max-width: 900px) {
+  .hide-mobile { display: none !important; }
+}

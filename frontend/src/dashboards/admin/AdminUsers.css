@@ -1,0 +1,121 @@
+/* --- 5-COLUMN SUMMARY GRID (Forced Single Row) --- */
+.users-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+}
+
+/* --- MAIN 75/25 SPLIT LAYOUT --- */
+.users-main-split {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  align-items: start;
+}
+
+.users-left-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.users-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* --- 4-COLUMN BOTTOM GRID --- */
+.users-bottom-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* --- USER SPECIFIC UI ELEMENTS --- */
+.user-info-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar-initials {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(144, 224, 239, 0.1);
+  color: #00B4D8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1px solid rgba(0, 180, 216, 0.3);
+}
+
+.role-text {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.role-admin { color: #3b82f6; }
+.role-pharmacist { color: #22c55e; }
+.role-staff { color: #f59e0b; }
+
+/* --- SIDEBAR LISTS (Quick Actions & Alerts) --- */
+.action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-list-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #CAF0F8;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.action-list-item:hover { color: #00B4D8; }
+
+.alert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.alert-list-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #94A3B8;
+  font-size: 0.85rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.dot.red { background: #f43f5e; }
+.dot.orange { background: #f59e0b; }
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+@media screen and (max-width: 1500px) {
+  .users-stats-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .users-bottom-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media screen and (max-width: 1200px) {
+  .users-main-split { grid-template-columns: 1fr; }
+  .users-right-col { display: grid; grid-template-columns: 1fr 1fr; }
+}
+
+@media screen and (max-width: 900px) {
+  .users-right-col { grid-template-columns: 1fr; }
+  .users-bottom-grid { grid-template-columns: 1fr; }
+  .hide-mobile { display: none !important; }
+}

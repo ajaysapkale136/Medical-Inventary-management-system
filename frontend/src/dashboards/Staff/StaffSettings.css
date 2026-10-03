@@ -1,0 +1,14 @@
+@import "../pharmacist/PharmacistSettings.css";
+
+.staff-settings .glass-panel {
+  border-color: rgba(34, 197, 94, 0.16);
+}
+
+.staff-settings .settings-tab.active {
+  background: rgba(34, 197, 94, 0.14);
+  color: #22c55e;
+}
+
+.staff-settings .settings-toggle-row input {
+  accent-color: #22c55e;
+}

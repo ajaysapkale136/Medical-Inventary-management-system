@@ -1,0 +1,18 @@
+package com.v.medical.entity;
+
+public enum ReportType {
+
+    INVENTORY,
+    STOCK_MOVEMENT,
+    EXPIRY,
+    PURCHASE_ORDER,
+    SUPPLIER,
+    USER_ACTIVITY,
+    FINANCIAL,
+    AUDIT,
+
+    STOCK_SUMMARY,
+    INVENTORY_VALUATION,
+    EXPIRY_ANALYSIS,
+    SUPPLIER_SUMMARY
+}

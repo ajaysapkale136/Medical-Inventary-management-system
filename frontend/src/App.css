@@ -1,0 +1,1273 @@
+/* ==========================================================================
+   MEDISTOCK ENTERPRISE DESIGN SYSTEM & HOMEPAGE STYLES
+   ========================================================================== */
+
+/* --- ROOT ENVIRONMENT & AMBIENT GLOW --- */
+.home-page-root {
+  min-height: 100vh;
+  background-color: #030712;
+  color: #F8FAFC;
+  position: relative;
+  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.ambient-radial-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-radial-glow.top-left {
+  top: -100px;
+  left: -150px;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(0, 180, 216, 0.16) 0%, rgba(3, 105, 161, 0.08) 50%, transparent 80%);
+}
+
+.ambient-radial-glow.bottom-right {
+  top: 900px;
+  right: -150px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(2, 132, 199, 0.06) 50%, transparent 80%);
+}
+
+.ambient-grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(144, 224, 239, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(144, 224, 239, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-container {
+  max-width: 1350px;
+  margin: 0 auto;
+  padding: 0 6%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Section Header Typography */
+.section-header-block {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 3.5rem auto;
+}
+
+.section-kicker {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #00B4D8;
+  background: rgba(0, 180, 216, 0.1);
+  border: 1px solid rgba(0, 180, 216, 0.3);
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-size: 2.35rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.8px;
+  color: #FFFFFF;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #94A3B8;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   1. HERO COMMAND CENTER SECTION
+   ========================================================================== */
+.hero-command-section {
+  position: relative;
+  padding: 4.5rem 6% 5.5rem 6%;
+  z-index: 1;
+}
+
+.hero-content-container {
+  max-width: 1350px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+/* Left Column: Typography & CTAs */
+.hero-text-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.hero-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 180, 216, 0.08);
+  border: 1px solid rgba(144, 224, 239, 0.25);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 1.75rem;
+}
+
+.live-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 10px #10B981;
+  animation: core-pulse 1.8s infinite alternate;
+}
+
+.pill-text {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #90E0EF;
+  text-transform: uppercase;
+}
+
+.hero-main-title {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-size: 3.4rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  color: #FFFFFF;
+  margin-bottom: 1.5rem;
+}
+
+.hero-main-title .gradient-highlight {
+  background: linear-gradient(135deg, #CAF0F8 0%, #00B4D8 60%, #38BDF8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-lead-description {
+  font-size: 1.12rem;
+  line-height: 1.7;
+  color: #94A3B8;
+  margin-bottom: 2.25rem;
+  max-width: 620px;
+}
+
+.hero-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #00B4D8 0%, #0077B6 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(144, 224, 239, 0.4);
+  padding: 13px 28px;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 25px rgba(0, 180, 216, 0.4);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-primary-hero:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 180, 216, 0.6);
+  filter: brightness(1.1);
+}
+
+.btn-secondary-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #CAF0F8;
+  border: 1px solid rgba(144, 224, 239, 0.2);
+  padding: 13px 24px;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.btn-secondary-hero:hover {
+  background: rgba(0, 180, 216, 0.1);
+  border-color: #00B4D8;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* Mini KPI Row */
+.hero-mini-kpi-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(144, 224, 239, 0.12);
+  width: 100%;
+}
+
+.mini-kpi-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.mini-kpi-item .kpi-val {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #F8FAFC;
+  letter-spacing: -0.3px;
+}
+
+.mini-kpi-item .kpi-lbl {
+  font-size: 0.72rem;
+  color: #94A3B8;
+  font-weight: 500;
+}
+
+.mini-kpi-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(144, 224, 239, 0.15);
+}
+
+/* Right Column: Moving Chakra & Orbiting Circles */
+.hero-visual-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.chakra-moving-circle-wrapper {
+  position: relative;
+  width: 520px;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+/* Chakra Design */
+.chakra-core {
+  position: relative;
+  width: 360px;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.chakra-blade {
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.outer-blades {
+  width: 360px;
+  height: 360px;
+  background: repeating-conic-gradient(
+    from 0deg, transparent 0deg, transparent 10deg,
+    rgba(144, 224, 239, 0.1) 12deg, rgba(0, 180, 216, 0.8) 15deg,
+    transparent 16deg
+  );
+  filter: drop-shadow(0 0 20px rgba(0, 180, 216, 0.5));
+  animation: chakra-spin-fast 4s linear infinite;
+  mask-image: radial-gradient(circle, transparent 60%, black 100%);
+  -webkit-mask-image: radial-gradient(circle, transparent 60%, black 100%);
+}
+
+.middle-ring {
+  width: 300px;
+  height: 300px;
+  border: 2px solid rgba(144, 224, 239, 0.4);
+  box-shadow: 0 0 40px rgba(0, 180, 216, 0.4), inset 0 0 40px rgba(0, 180, 216, 0.4);
+  background: conic-gradient(from 0deg, rgba(0, 180, 216, 0) 0%, rgba(144, 224, 239, 0.2) 50%, rgba(0, 180, 216, 0) 100%);
+  animation: chakra-spin-slow 8s linear infinite reverse;
+}
+
+.inner-spokes {
+  width: 240px;
+  height: 240px;
+  background: repeating-conic-gradient(
+    from 0deg, rgba(202, 240, 248, 0.6) 0deg, rgba(202, 240, 248, 0.6) 2deg,
+    transparent 3deg, transparent 15deg
+  );
+  animation: chakra-spin-fast 12s linear infinite;
+  mask-image: radial-gradient(circle, transparent 50%, black 90%);
+  -webkit-mask-image: radial-gradient(circle, transparent 50%, black 90%);
+}
+
+.chakra-hub {
+  position: absolute;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: rgba(3, 4, 94, 0.85);
+  border: 2px solid rgba(144, 224, 239, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 50px rgba(0, 119, 182, 0.8), inset 0 0 20px rgba(144, 224, 239, 0.5);
+  z-index: 10;
+}
+
+.hub-core-light {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #CAF0F8;
+  box-shadow: 0 0 30px 10px #90E0EF;
+  animation: core-pulse 2s ease-in-out infinite alternate;
+}
+
+/* Special Orbital Circles */
+.special-circle {
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px dashed rgba(144, 224, 239, 0.22);
+  z-index: 5;
+}
+
+.orbit-track-1 { width: 420px; height: 420px; animation: spin-forward 10s linear infinite; }
+.orbit-track-2 { width: 480px; height: 480px; animation: spin-reverse 15s linear infinite; }
+.orbit-track-3 { width: 540px; height: 540px; animation: spin-forward 20s linear infinite; }
+
+.orbiting-object {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.obj-1 .textless-icon { animation: counter-spin-forward 10s linear infinite; }
+.obj-2 .textless-icon { animation: counter-spin-reverse 15s linear infinite; }
+.obj-3 .textless-icon { animation: counter-spin-forward 20s linear infinite; }
+
+.textless-icon {
+  background: rgba(202, 240, 248, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(144, 224, 239, 0.35);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 0 10px rgba(144, 224, 239, 0.2);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+}
+
+.ice-glow {
+  box-shadow: inset 0 0 15px rgba(144, 224, 239, 0.3), 0 0 15px rgba(144, 224, 239, 0.4);
+  text-shadow: 0 0 10px #90E0EF;
+}
+
+.deep-ice-glow {
+  box-shadow: inset 0 0 15px rgba(0, 180, 216, 0.3), 0 0 15px rgba(0, 180, 216, 0.4);
+  text-shadow: 0 0 10px #00B4D8;
+}
+
+/* Floating Telemetry HUD Badge */
+.floating-telemetry-badge {
+  position: absolute;
+  bottom: -30px;
+  right: 15px;
+  z-index: 15;
+  background: rgba(3, 7, 18, 0.92);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 180, 216, 0.4);
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 180, 216, 0.2);
+}
+
+.telemetry-badge-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #00B4D8;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.badge-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 6px #10B981;
+}
+
+.telemetry-badge-body {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.74rem;
+  color: #F8FAFC;
+}
+
+.badge-fefo-status {
+  font-size: 0.68rem;
+  color: #34D399;
+  font-weight: 600;
+}
+
+/* Keyframes for Chakra & Orbits */
+@keyframes chakra-spin-fast { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes chakra-spin-slow { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes core-pulse { 0% { transform: scale(0.92); opacity: 0.85; } 100% { transform: scale(1.15); opacity: 1; } }
+@keyframes spin-forward { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes spin-reverse { 100% { transform: translate(-50%, -50%) rotate(-360deg); } }
+@keyframes counter-spin-forward { 100% { transform: translateX(-50%) rotate(-360deg); } }
+@keyframes counter-spin-reverse { 100% { transform: translateX(-50%) rotate(360deg); } }
+
+/* ==========================================================================
+   2. LIVE OPERATIONAL TELEMETRY BANNER
+   ========================================================================== */
+.telemetry-banner-section {
+  padding: 2.5rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.telemetry-card {
+  background: rgba(10, 25, 47, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(144, 224, 239, 0.12);
+  border-top: 1px solid rgba(144, 224, 239, 0.25);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+}
+
+.telemetry-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 180, 216, 0.4);
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 180, 216, 0.15);
+}
+
+.telemetry-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #94A3B8;
+  letter-spacing: 0.2px;
+}
+
+.metric-badge-pill {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.metric-badge-pill.positive {
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.metric-badge-pill.zero-risk,
+.metric-badge-pill.compliance {
+  color: #34D399;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.metric-large-val {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #F8FAFC;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.4rem;
+}
+
+.metric-unit {
+  font-size: 0.95rem;
+  color: #94A3B8;
+  font-weight: 500;
+}
+
+.metric-desc {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #94A3B8;
+  margin: 0 0 1rem 0;
+}
+
+.metric-bar-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.metric-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00B4D8, #38BDF8);
+  border-radius: 4px;
+  box-shadow: 0 0 8px #00B4D8;
+}
+
+.metric-bar-fill.emerald {
+  background: linear-gradient(90deg, #10B981, #34D399);
+  box-shadow: 0 0 8px #10B981;
+}
+
+/* ==========================================================================
+   3. CLINICAL ROLE-BASED PORTALS SHOWCASE
+   ========================================================================== */
+.solutions-section {
+  padding: 6rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.role-tabs-bar {
+  display: inline-flex;
+  background: rgba(10, 25, 47, 0.7);
+  border: 1px solid rgba(144, 224, 239, 0.2);
+  padding: 6px;
+  border-radius: 12px;
+  gap: 6px;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.role-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: #94A3B8;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.role-tab-btn:hover {
+  color: #CAF0F8;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.role-tab-btn.active {
+  background: linear-gradient(135deg, rgba(0, 180, 216, 0.3) 0%, rgba(14, 116, 144, 0.4) 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(0, 180, 216, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 180, 216, 0.25);
+}
+
+.role-display-card {
+  background: rgba(10, 25, 47, 0.5);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(144, 224, 239, 0.15);
+  border-top: 1px solid rgba(144, 224, 239, 0.3);
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7);
+}
+
+.role-content-split {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.role-info-side {
+  text-align: left;
+}
+
+.role-badge-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.role-badge-tag.admin {
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.role-badge-tag.pharmacy {
+  color: #34D399;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.role-badge-tag.staff {
+  color: #F59E0B;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.role-heading {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+}
+
+.role-text {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #94A3B8;
+  margin-bottom: 1.75rem;
+}
+
+.role-capabilities-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.role-capabilities-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #CBD5E1;
+}
+
+.role-capabilities-list li svg {
+  width: 18px;
+  height: 18px;
+  color: #00B4D8;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.btn-role-action {
+  background: linear-gradient(135deg, #00B4D8 0%, #0077B6 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(144, 224, 239, 0.35);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3);
+  transition: all 0.25s ease;
+}
+
+.btn-role-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 180, 216, 0.5);
+  filter: brightness(1.1);
+}
+
+/* Mock Dashboard Preview Card */
+.mock-dashboard-card {
+  background: rgba(3, 7, 18, 0.85);
+  border: 1px solid rgba(144, 224, 239, 0.2);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+}
+
+.mock-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #F8FAFC;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(144, 224, 239, 0.12);
+  margin-bottom: 1rem;
+}
+
+.mock-pill {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.mock-pill.green { color: #34D399; background: rgba(16, 185, 129, 0.15); }
+.mock-pill.cyan { color: #38BDF8; background: rgba(56, 189, 248, 0.15); }
+
+.mock-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+  font-size: 0.82rem;
+}
+
+.mock-list-item:last-child {
+  border-bottom: none;
+}
+
+.log-action {
+  font-weight: 700;
+  color: #00B4D8;
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+}
+
+.log-entity {
+  color: #CBD5E1;
+  font-size: 0.8rem;
+}
+
+.log-time {
+  color: #64748B;
+  font-size: 0.72rem;
+}
+
+.mock-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.mock-tag.red { color: #F43F5E; background: rgba(244, 63, 94, 0.15); }
+.mock-tag.orange { color: #F59E0B; background: rgba(245, 158, 11, 0.15); }
+.mock-tag.green { color: #34D399; background: rgba(16, 185, 129, 0.15); }
+
+/* ==========================================================================
+   4. CORE ENTERPRISE CAPABILITIES GRID
+   ========================================================================== */
+.features-grid-section {
+  padding: 6rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.features-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.feature-item-card {
+  background: rgba(10, 25, 47, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(144, 224, 239, 0.12);
+  border-top: 1px solid rgba(144, 224, 239, 0.28);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.feature-item-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 180, 216, 0.45);
+  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 180, 216, 0.15);
+}
+
+.feature-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0, 180, 216, 0.2) 0%, rgba(3, 7, 18, 0.8) 100%);
+  border: 1px solid rgba(144, 224, 239, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 0 15px rgba(0, 180, 216, 0.2);
+}
+
+.feature-icon-wrapper svg {
+  width: 24px;
+  height: 24px;
+  color: #00B4D8;
+}
+
+.feature-card-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #F8FAFC;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.3px;
+}
+
+.feature-card-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #94A3B8;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.feature-card-highlight {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #38BDF8;
+  background: rgba(0, 180, 216, 0.08);
+  border: 1px solid rgba(0, 180, 216, 0.2);
+  padding: 4px 10px;
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   5. THE 4-STAGE CLINICAL LOGISTICS PIPELINE
+   ========================================================================== */
+.workflow-section {
+  padding: 6rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.pipeline-steps-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+}
+
+.pipeline-step-card {
+  flex: 1;
+  background: rgba(10, 25, 47, 0.5);
+  border: 1px solid rgba(144, 224, 239, 0.15);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.pipeline-step-card:hover {
+  transform: translateY(-4px);
+  border-color: #00B4D8;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 180, 216, 0.2);
+}
+
+.step-number-tag {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #00B4D8 0%, #0077B6 100%);
+  color: #FFFFFF;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 2px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+}
+
+.step-icon {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.step-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #F8FAFC;
+  margin-bottom: 0.6rem;
+}
+
+.step-desc {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #94A3B8;
+  margin: 0;
+}
+
+.pipeline-connector-line {
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(0, 180, 216, 0.6), rgba(144, 224, 239, 0.2));
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   6. REGULATORY COMPLIANCE & STANDARDS
+   ========================================================================== */
+.compliance-section {
+  padding: 5rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.compliance-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.compliance-card {
+  background: rgba(10, 25, 47, 0.4);
+  border: 1px solid rgba(144, 224, 239, 0.12);
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.compliance-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.comp-card-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.compliance-card h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #F8FAFC;
+  margin-bottom: 0.5rem;
+}
+
+.compliance-card p {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #94A3B8;
+  margin: 0;
+}
+
+/* ==========================================================================
+   7. HIGH-CONVERSION ENTERPRISE CTA BANNER
+   ========================================================================== */
+.cta-banner-section {
+  padding: 5rem 0 7rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-glass-banner {
+  background: linear-gradient(135deg, rgba(10, 25, 47, 0.85) 0%, rgba(3, 7, 18, 0.95) 100%);
+  border: 1px solid rgba(0, 180, 216, 0.35);
+  border-top: 1px solid rgba(144, 224, 239, 0.5);
+  border-radius: 24px;
+  padding: 4.5rem 3rem;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 180, 216, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-glass-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 100%;
+  background: radial-gradient(ellipse at top, rgba(0, 180, 216, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-content {
+  position: relative;
+  z-index: 2;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.cta-kicker {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #00B4D8;
+  background: rgba(0, 180, 216, 0.12);
+  border: 1px solid rgba(0, 180, 216, 0.3);
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 1.25rem;
+}
+
+.cta-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #FFFFFF;
+  margin-bottom: 1.25rem;
+  letter-spacing: -1px;
+}
+
+.cta-desc {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #94A3B8;
+  margin-bottom: 2.5rem;
+}
+
+.cta-buttons-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary-cta {
+  background: linear-gradient(135deg, #00B4D8 0%, #0077B6 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(144, 224, 239, 0.4);
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 25px rgba(0, 180, 216, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-primary-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 35px rgba(0, 180, 216, 0.6);
+  filter: brightness(1.1);
+}
+
+.btn-secondary-cta {
+  background: rgba(255, 255, 255, 0.04);
+  color: #CAF0F8;
+  border: 1px solid rgba(144, 224, 239, 0.25);
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-secondary-cta:hover {
+  background: rgba(0, 180, 216, 0.1);
+  border-color: #00B4D8;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.cta-demo-helper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #64748B;
+  flex-wrap: wrap;
+}
+
+.cta-demo-helper code {
+  font-family: 'JetBrains Mono', monospace;
+  color: #90E0EF;
+  background: rgba(0, 180, 216, 0.08);
+  border: 1px solid rgba(0, 180, 216, 0.2);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   8. RESPONSIVE BREAKPOINTS (ALL DEVICES)
+   ========================================================================== */
+@media screen and (max-width: 1200px) {
+  .hero-content-container {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+    text-align: center;
+  }
+
+  .hero-text-column {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-main-title {
+    font-size: 2.8rem;
+  }
+
+  .hero-action-buttons {
+    justify-content: center;
+  }
+
+  .hero-mini-kpi-row {
+    justify-content: center;
+  }
+
+  .telemetry-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .features-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .compliance-badges-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pipeline-steps-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .pipeline-connector-line {
+    width: 2px;
+    height: 25px;
+  }
+
+  .chakra-moving-circle-wrapper {
+    transform: scale(0.88);
+    margin: 1.5rem 0;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .role-content-split {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .role-display-card {
+    padding: 2rem;
+  }
+
+  .hero-mini-kpi-row {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .mini-kpi-divider {
+    display: none;
+  }
+
+  .chakra-moving-circle-wrapper {
+    transform: scale(0.75);
+    margin: 1rem 0;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .chakra-moving-circle-wrapper {
+    transform: scale(0.56);
+    margin: 0.5rem 0;
+  }
+
+  .hero-main-title {
+    font-size: 2.2rem;
+  }
+
+  .section-title {
+    font-size: 1.85rem;
+  }
+
+  .cta-title {
+    font-size: 1.95rem;
+  }
+
+  .telemetry-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .features-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .compliance-badges-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-glass-banner {
+    padding: 3rem 1.5rem;
+  }
+}
