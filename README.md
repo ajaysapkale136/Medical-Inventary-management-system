@@ -67,6 +67,18 @@ docker compose up --build
 
 Compose uses a named MySQL volume. Do not run `docker compose down -v` against a database with data you need to retain.
 
+## Dashboard Login Credentials
+
+| Role | Dashboard URL | Email / Username | Password |
+|---|---|---|---|
+| **Admin** | `/admin` | `admin@medistock.com` | `Admin@1234` |
+| **Pharmacist** | `/pharmacy` | `pharmacist@medistock.com` | `Pharma@1234` |
+| **Staff** | `/staff` | `staff@medistock.com` | `Staff@1234` |
+
+Additional accounts:
+- Pharmacist: `sneha.nair@medistock.com` / `Staff@1234`
+- Staff: `amit.patel@medistock.com` / `Staff@1234`
+
 ## Authentication and roles
 
 Authentication uses an HTTP-only server session cookie. Login routes users to their dashboard:
