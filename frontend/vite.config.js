@@ -1,9 +1,11 @@
+
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+
   server: {
     proxy: {
       '/api': {
@@ -12,9 +14,14 @@ export default defineConfig({
       },
     },
   },
+
   build: {
-    // This tells Vite to output the build directly into Spring Boot's static folder
-    outDir: '../src/main/resources/static',
-    emptyOutDir: true // Clears the folder before each new build
-  }
+    // Vercel builds frontend into dist.
+    // Local builds remain compatible with Spring Boot.
+    outDir: process.env.VERCEL
+      ? 'dist'
+      : '../src/main/resources/static',
+
+    emptyOutDir: true,
+  },
 })
