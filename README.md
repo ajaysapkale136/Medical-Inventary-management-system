@@ -67,6 +67,25 @@ docker compose up --build
 
 Compose uses a named MySQL volume. Do not run `docker compose down -v` against a database with data you need to retain.
 
+## Deploy on Render
+
+This project contains a multi-stage `Dockerfile` and a `render.yaml` Blueprint ready for deployment on [Render](https://render.com).
+
+### Step-by-step:
+1. Go to [Render Dashboard](https://dashboard.render.com).
+2. Click **New +** > **Web Service** (or **Blueprint**).
+3. Connect your GitHub repository: `ajaysapkale136/Medical-Inventary-management-system`.
+4. Choose **Docker** as the Runtime (Render automatically detects `./Dockerfile`).
+5. Configure Environment Variables in the Render settings:
+   - `PORT`: `8080`
+   - `SERVER_ADDRESS`: `0.0.0.0`
+   - `DB_URL`: `jdbc:mysql://<host>:3306/<database>` (or `jdbc:postgresql://<host>:5432/<database>` if using PostgreSQL)
+   - `DB_USERNAME`: `<your_db_username>`
+   - `DB_PASSWORD`: `<your_db_password>`
+   - `DDL_AUTO`: `update`
+   - `ADMIN_BOOTSTRAP_TOKEN`: `<your_secret_admin_token>`
+6. Click **Create Web Service**. Render builds the React frontend, packages the Spring Boot JAR, and serves the live application.
+
 ## Dashboard Login Credentials
 
 | Role | Dashboard URL | Email / Username | Password |
