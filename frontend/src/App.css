@@ -283,6 +283,7 @@
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease;
+  filter: drop-shadow(0 0 28px rgba(15, 118, 110, 0.18));
 }
 
 /* Chakra Design */
@@ -309,11 +310,11 @@
   height: 360px;
   background: repeating-conic-gradient(
     from 0deg, transparent 0deg, transparent 10deg,
-    rgba(144, 224, 239, 0.1) 12deg, rgba(0, 180, 216, 0.8) 15deg,
+    rgba(250, 204, 21, 0.08) 12deg, rgba(6, 182, 212, 0.86) 15deg,
     transparent 16deg
   );
-  filter: drop-shadow(0 0 20px rgba(0, 180, 216, 0.5));
-  animation: chakra-spin-fast 4s linear infinite;
+  filter: drop-shadow(0 0 18px rgba(6, 182, 212, 0.52)) drop-shadow(0 0 28px rgba(245, 158, 11, 0.15));
+  animation: chakra-spin-fast 7s linear infinite;
   mask-image: radial-gradient(circle, transparent 60%, black 100%);
   -webkit-mask-image: radial-gradient(circle, transparent 60%, black 100%);
 }
@@ -321,20 +322,21 @@
 .middle-ring {
   width: 300px;
   height: 300px;
-  border: 2px solid rgba(144, 224, 239, 0.4);
-  box-shadow: 0 0 40px rgba(0, 180, 216, 0.4), inset 0 0 40px rgba(0, 180, 216, 0.4);
-  background: conic-gradient(from 0deg, rgba(0, 180, 216, 0) 0%, rgba(144, 224, 239, 0.2) 50%, rgba(0, 180, 216, 0) 100%);
-  animation: chakra-spin-slow 8s linear infinite reverse;
+  border: 2px solid rgba(56, 189, 248, 0.48);
+  box-shadow: 0 0 42px rgba(14, 165, 233, 0.38), inset 0 0 44px rgba(6, 182, 212, 0.28), inset 0 0 70px rgba(245, 158, 11, 0.08);
+  background: conic-gradient(from 0deg, rgba(6, 182, 212, 0) 0%, rgba(250, 204, 21, 0.22) 22%, rgba(56, 189, 248, 0.18) 50%, rgba(16, 185, 129, 0.16) 72%, rgba(6, 182, 212, 0) 100%);
+  animation: chakra-spin-slow 14s linear infinite reverse;
 }
 
 .inner-spokes {
   width: 240px;
   height: 240px;
   background: repeating-conic-gradient(
-    from 0deg, rgba(202, 240, 248, 0.6) 0deg, rgba(202, 240, 248, 0.6) 2deg,
+    from 0deg, rgba(251, 191, 36, 0.78) 0deg, rgba(125, 211, 252, 0.7) 2deg,
     transparent 3deg, transparent 15deg
   );
-  animation: chakra-spin-fast 12s linear infinite;
+  filter: drop-shadow(0 0 5px rgba(250, 204, 21, 0.55));
+  animation: chakra-spin-fast 18s linear infinite;
   mask-image: radial-gradient(circle, transparent 50%, black 90%);
   -webkit-mask-image: radial-gradient(circle, transparent 50%, black 90%);
 }
@@ -344,12 +346,12 @@
   width: 88px;
   height: 88px;
   border-radius: 50%;
-  background: rgba(3, 4, 94, 0.85);
-  border: 2px solid rgba(144, 224, 239, 0.8);
+  background: radial-gradient(circle at 35% 30%, rgba(125, 211, 252, 0.7), rgba(30, 64, 175, 0.94) 45%, rgba(49, 46, 129, 0.98));
+  border: 2px solid rgba(250, 204, 21, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 50px rgba(0, 119, 182, 0.8), inset 0 0 20px rgba(144, 224, 239, 0.5);
+  box-shadow: 0 0 50px rgba(37, 99, 235, 0.8), 0 0 24px rgba(245, 158, 11, 0.26), inset 0 0 20px rgba(224, 242, 254, 0.6);
   z-index: 10;
 }
 
@@ -357,9 +359,9 @@
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: #CAF0F8;
-  box-shadow: 0 0 30px 10px #90E0EF;
-  animation: core-pulse 2s ease-in-out infinite alternate;
+  background: radial-gradient(circle, #fff7cc 0%, #facc15 45%, #fb923c 100%);
+  box-shadow: 0 0 26px 9px rgba(250, 204, 21, 0.82), 0 0 48px 16px rgba(14, 165, 233, 0.42);
+  animation: core-pulse 2.8s ease-in-out infinite alternate;
 }
 
 /* Special Orbital Circles */
@@ -373,9 +375,9 @@
   z-index: 5;
 }
 
-.orbit-track-1 { width: 420px; height: 420px; animation: spin-forward 10s linear infinite; }
-.orbit-track-2 { width: 480px; height: 480px; animation: spin-reverse 15s linear infinite; }
-.orbit-track-3 { width: 540px; height: 540px; animation: spin-forward 20s linear infinite; }
+.orbit-track-1 { width: 420px; height: 420px; border-color: rgba(250, 204, 21, 0.26); animation: spin-forward 15s linear infinite; }
+.orbit-track-2 { width: 480px; height: 480px; border-color: rgba(56, 189, 248, 0.25); animation: spin-reverse 22s linear infinite; }
+.orbit-track-3 { width: 540px; height: 540px; border-color: rgba(16, 185, 129, 0.24); animation: spin-forward 30s linear infinite; }
 
 .orbiting-object {
   position: absolute;
@@ -384,9 +386,9 @@
   transform: translateX(-50%);
 }
 
-.obj-1 .textless-icon { animation: counter-spin-forward 10s linear infinite; }
-.obj-2 .textless-icon { animation: counter-spin-reverse 15s linear infinite; }
-.obj-3 .textless-icon { animation: counter-spin-forward 20s linear infinite; }
+.obj-1 .textless-icon { animation: counter-spin-forward 15s linear infinite; }
+.obj-2 .textless-icon { animation: counter-spin-reverse 22s linear infinite; }
+.obj-3 .textless-icon { animation: counter-spin-forward 30s linear infinite; }
 
 .textless-icon {
   background: rgba(202, 240, 248, 0.05);
@@ -411,6 +413,14 @@
 .deep-ice-glow {
   box-shadow: inset 0 0 15px rgba(0, 180, 216, 0.3), 0 0 15px rgba(0, 180, 216, 0.4);
   text-shadow: 0 0 10px #00B4D8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .outer-blades, .middle-ring, .inner-spokes, .hub-core-light,
+  .orbit-track-1, .orbit-track-2, .orbit-track-3,
+  .obj-1 .textless-icon, .obj-2 .textless-icon, .obj-3 .textless-icon {
+    animation: none;
+  }
 }
 
 /* Floating Telemetry HUD Badge */
