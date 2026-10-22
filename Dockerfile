@@ -1,22 +1,13 @@
-# Stage 1: Build backend & frontend
-FROM eclipse-temurin:21-jdk AS builder
+# Stage 1: Build backend JAR with pre-bundled static resources
+FROM maven:3.9-eclipse-temurin-21 AS builder
 
 WORKDIR /build
 
-# Copy maven wrapper & pom
-COPY pom.xml mvnw ./
-COPY .mvn .mvn/
-
-RUN chmod +x ./mvnw
-
-# Copy frontend source
-COPY frontend frontend/
-
-# Copy java source & resources (already contains pre-built frontend in static)
+COPY pom.xml ./
 COPY src src/
 
-# Build project with pre-bundled static resources (bypasses redundant Node/npm install during Docker build)
-RUN ./mvnw clean package -DskipTests -DskipFrontend=true
+# Build JAR with pre-bundled frontend in static resources
+RUN mvn clean package -DskipTests -DskipFrontend=true
 
 # Stage 2: Minimal runtime image
 FROM eclipse-temurin:21-jre
