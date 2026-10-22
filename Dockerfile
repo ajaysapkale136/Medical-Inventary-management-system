@@ -12,11 +12,11 @@ RUN chmod +x ./mvnw
 # Copy frontend source
 COPY frontend frontend/
 
-# Copy java source & resources
+# Copy java source & resources (already contains pre-built frontend in static)
 COPY src src/
 
-# Build project with frontend integration
-RUN ./mvnw clean package -DskipTests
+# Build project with pre-bundled static resources (bypasses redundant Node/npm install during Docker build)
+RUN ./mvnw clean package -DskipTests -DskipFrontend=true
 
 # Stage 2: Minimal runtime image
 FROM eclipse-temurin:21-jre
