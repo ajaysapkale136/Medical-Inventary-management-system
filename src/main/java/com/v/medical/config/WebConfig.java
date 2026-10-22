@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     private final SessionAuthInterceptor sessionAuthInterceptor;
 
-    @Value("${app.cors.allowed-origin-patterns:http://localhost:3000,http://localhost:5173,http://127.0.0.1:5173}")
+    @Value("${app.cors.allowed-origin-patterns:*}")
     private String[] allowedOriginPatterns;
 
     public WebConfig(SessionAuthInterceptor sessionAuthInterceptor) {

@@ -1,4 +1,3 @@
-
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -16,12 +15,10 @@ export default defineConfig({
   },
 
   build: {
-    // Vercel builds frontend into dist.
-    // Local builds remain compatible with Spring Boot.
+    // Vercel builds into dist; Spring Boot builds into resources/static.
     outDir: process.env.VERCEL
       ? 'dist'
       : '../src/main/resources/static',
-
     emptyOutDir: true,
   },
 })

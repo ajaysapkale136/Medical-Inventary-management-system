@@ -13,12 +13,12 @@ React is built into the Spring Boot application. The application serves both the
 Copy `.env.example` values into your shell or deployment secret manager. Do not commit a real `.env` file.
 
 ```text
-DB_URL=jdbc:mysql://localhost:3306/medical_inventory
-DB_USERNAME=your_mysql_user
-DB_PASSWORD=your_mysql_password
+DB_URL=jdbc:mysql://mysql-3c3756e4-medical-mannagement.c.aivencloud.com:12923/defaultdb?sslMode=REQUIRED&allowPublicKeyRetrieval=true
+DB_USERNAME=avnadmin
+DB_PASSWORD=<your_aiven_password>
 ADMIN_BOOTSTRAP_TOKEN=a-long-random-one-time-token
-CORS_ALLOWED_ORIGINS=https://your-frontend-domain
-SESSION_COOKIE_SECURE=true
+CORS_ALLOWED_ORIGINS=*
+SESSION_COOKIE_SECURE=false
 DDL_AUTO=update
 ```
 
@@ -27,10 +27,9 @@ DDL_AUTO=update
 ## Run locally
 
 ```powershell
-$env:DB_URL = 'jdbc:mysql://localhost:3306/medical_inventory'
-$env:DB_USERNAME = 'your_mysql_user'
-$env:DB_PASSWORD = 'your_mysql_password'
-$env:ADMIN_BOOTSTRAP_TOKEN = 'a-long-random-token'
+$env:DB_URL = 'jdbc:mysql://mysql-3c3756e4-medical-mannagement.c.aivencloud.com:12923/defaultdb?sslMode=REQUIRED&allowPublicKeyRetrieval=true'
+$env:DB_USERNAME = 'avnadmin'
+$env:DB_PASSWORD = '<your_aiven_password>'
 .\mvnw.cmd spring-boot:run
 ```
 
@@ -71,6 +70,17 @@ Compose uses a named MySQL volume. Do not run `docker compose down -v` against a
 
 This project contains a multi-stage `Dockerfile` and a `render.yaml` Blueprint ready for deployment on [Render](https://render.com).
 
+### Live Aiven Cloud Database Configuration
+The application is pre-configured to connect to your live Aiven MySQL cloud instance:
+- **Host:** `mysql-3c3756e4-medical-mannagement.c.aivencloud.com`
+- **Port:** `12923`
+- **Database:** `defaultdb`
+- **User:** `avnadmin`
+- **Password:** Set in Render environment variables
+- **JDBC URL:** `jdbc:mysql://mysql-3c3756e4-medical-mannagement.c.aivencloud.com:12923/defaultdb?sslMode=REQUIRED&allowPublicKeyRetrieval=true`
+
+*(The backend also includes an automatic URI parser: you can provide either `jdbc:mysql://...` or standard URI `mysql://avnadmin:<password>@mysql-3c3756e4-medical-mannagement.c.aivencloud.com:12923/defaultdb?ssl-mode=REQUIRED`)*
+
 ### Step-by-step:
 1. Go to [Render Dashboard](https://dashboard.render.com).
 2. Click **New +** > **Web Service** (or **Blueprint**).
@@ -79,12 +89,12 @@ This project contains a multi-stage `Dockerfile` and a `render.yaml` Blueprint r
 5. Configure Environment Variables in the Render settings:
    - `PORT`: `8080`
    - `SERVER_ADDRESS`: `0.0.0.0`
-   - `DB_URL`: `jdbc:mysql://<host>:3306/<database>` (or `jdbc:postgresql://<host>:5432/<database>` if using PostgreSQL)
-   - `DB_USERNAME`: `<your_db_username>`
-   - `DB_PASSWORD`: `<your_db_password>`
+   - `DB_URL`: `jdbc:mysql://mysql-3c3756e4-medical-mannagement.c.aivencloud.com:12923/defaultdb?sslMode=REQUIRED&allowPublicKeyRetrieval=true`
+   - `DB_USERNAME`: `avnadmin`
+   - `DB_PASSWORD`: `<your_aiven_password>`
    - `DDL_AUTO`: `update`
-   - `ADMIN_BOOTSTRAP_TOKEN`: `<your_secret_admin_token>`
-6. Click **Create Web Service**. Render builds the React frontend, packages the Spring Boot JAR, and serves the live application.
+   - `CORS_ALLOWED_ORIGINS`: `*`
+6. Click **Create Web Service**. Render builds the React frontend, packages the Spring Boot JAR, connects to Aiven, seeds default users, and serves the live application.
 
 ## Dashboard Login Credentials
 

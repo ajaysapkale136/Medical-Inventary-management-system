@@ -1,8 +1,9 @@
 import axios from 'axios'
 
-/** Pre-configured Axios instance. Adds the JWT token to every request. */
+/** Pre-configured Axios instance. Supports relative URL on deployed host and JWT/Session cookies. */
 const api = axios.create({
-  baseURL: (import.meta.env.VITE_API_URL || 'http://localhost:8080') + '/api',
+  baseURL: import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : '/api',
+  withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 })
 
@@ -12,14 +13,16 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-// If the token expired, send the user back to the login page.
+// If the session/token expired, send the user back to the login page.
 api.interceptors.response.use(
   (res) => res,
   (err) => {
     if (err.response && err.response.status === 401) {
       localStorage.removeItem('medistock_token')
       localStorage.removeItem('medistock_user')
-      if (!window.location.pathname.startsWith('/login')) window.location.href = '/login'
+      if (!window.location.pathname.startsWith('/auth') && !window.location.pathname.startsWith('/login')) {
+        window.location.href = '/auth'
+      }
     }
     return Promise.reject(err)
   }
