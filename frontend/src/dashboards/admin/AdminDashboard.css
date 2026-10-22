@@ -208,6 +208,9 @@
 
 /* --- DASHBOARD SCROLLABLE CONTENT --- */
 .dashboard-content {
+  /* Fill the space below the top bar so page content scrolls instead of shrinking. */
+  flex: 1;
+  min-height: 0;
   padding: 2rem;
   overflow-y: auto;
   z-index: 1;
