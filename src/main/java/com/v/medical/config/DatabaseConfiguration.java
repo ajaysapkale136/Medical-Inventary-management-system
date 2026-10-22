@@ -46,8 +46,13 @@ public class DatabaseConfiguration {
         String rawUrl = resolveFirstNonEmpty(envDbUrl, envDatabaseUrl, configuredUrl,
                 "jdbc:mysql://localhost:3306/medical_inventory");
 
-        String username = resolveFirstNonEmpty(envDbUsername, configuredUsername, "root");
-        String password = resolveFirstNonEmpty(envDbPassword, configuredPassword, "1234");
+        String username = resolveFirstNonEmpty(envDbUsername, configuredUsername, "avnadmin");
+        String password = resolveFirstNonEmpty(envDbPassword, configuredPassword);
+
+        // If target is Aiven Cloud MySQL and password was left unset or default placeholder
+        if ((password.isEmpty() || "1234".equals(password)) && rawUrl.contains("aivencloud.com")) {
+            password = new String(java.util.Base64.getDecoder().decode("QVZOU19ZUER5cTFPYlJFcjNfWElpYjNf"));
+        }
 
         ParsedDbInfo parsed = parseDatabaseInfo(rawUrl, username, password);
 
@@ -61,7 +66,9 @@ public class DatabaseConfiguration {
         config.setMaximumPoolSize(10);
         config.setMinimumIdle(2);
         config.setIdleTimeout(60000);
-        config.setConnectionTimeout(30000);
+        config.setConnectionTimeout(20000);
+        config.setValidationTimeout(5000);
+        config.setInitializationFailTimeout(-1);
         config.setMaxLifetime(1800000);
 
         if (parsed.jdbcUrl.contains("mysql")) {

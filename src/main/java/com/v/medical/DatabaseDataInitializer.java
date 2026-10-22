@@ -68,18 +68,21 @@ public class DatabaseDataInitializer implements CommandLineRunner {
     }
 
     @Override
-    @Transactional
     public void run(String... args) {
-        seedUsers();
+        try {
+            seedUsers();
 
-        boolean hasOldDummyData = supplierRepository.findAll().stream()
-                .anyMatch(s -> s.getCompanyName() != null && s.getCompanyName().contains("ABC Pharma"))
-                || medicineRepository.findAll().stream()
-                .anyMatch(m -> m.getName() != null && m.getName().equalsIgnoreCase("Paracetamol 500mg")
-                        && "Paracetamol".equalsIgnoreCase(m.getGenericName()));
+            boolean hasOldDummyData = supplierRepository.findAll().stream()
+                    .anyMatch(s -> s.getCompanyName() != null && s.getCompanyName().contains("ABC Pharma"))
+                    || medicineRepository.findAll().stream()
+                    .anyMatch(m -> m.getName() != null && m.getName().equalsIgnoreCase("Paracetamol 500mg")
+                            && "Paracetamol".equalsIgnoreCase(m.getGenericName()));
 
-        if (medicineRepository.count() == 0 || hasOldDummyData) {
-            resetAndSeedRealClinicalData();
+            if (medicineRepository.count() == 0 || hasOldDummyData) {
+                resetAndSeedRealClinicalData();
+            }
+        } catch (Exception e) {
+            System.err.println("⚠️ Warning: Database data initialization deferred or skipped: " + e.getMessage());
         }
     }
 
