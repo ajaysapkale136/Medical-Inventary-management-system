@@ -176,11 +176,14 @@ const PharmacistDashboard = () => {
         </button>
       </div>
 
-      {/* ROW 2 */}
+      {/* ROW 2: INVENTORY OVERVIEW & LOW STOCK ITEMS */}
       <div className="row-2-grid">
         {/* Inventory Overview Chart */}
         <div className="pharma-card">
-          <h3 style={{marginBottom: '1rem', fontSize: '1rem'}}>Inventory Overview</h3>
+          <div className="card-header-row">
+            <h3>Inventory Stock Distribution</h3>
+            <span style={{ fontSize: '0.8rem', color: '#34d399', fontWeight: '600' }}>Live Telemetry</span>
+          </div>
           <div className="donut-analytics pharmacist-chart">
             <div className="donut-ring" style={{
               background: `conic-gradient(#10b981 0% ${inStockPct}%, #f59e0b ${inStockPct}% ${inStockPct + lowStockPct}%, #3b82f6 ${inStockPct + lowStockPct}% 100%)`
@@ -193,33 +196,46 @@ const PharmacistDashboard = () => {
           </div>
         </div>
 
+        {/* Low Stock Items */}
         <div className="pharma-card">
           <div className="card-header-row">
-            <h3>Low Stock Items</h3>
-            <button className="card-link" onClick={() => navigate('/pharmacy/monitoring')}>View All</button>
+            <h3>Low Stock Items &amp; Reorder Queue</h3>
+            <button className="card-link" onClick={() => navigate('/pharmacy/monitoring')}>View All ›</button>
           </div>
-          <table className="table-light">
-            <thead><tr><th>Medicine Name</th><th>Current Stock</th><th>Reorder Level</th></tr></thead>
-            <tbody>
-              {lowStock.map(item => (
-                <tr key={item.id}>
-                  <td style={{color: '#00B4D8', fontWeight: '500'}}>💊 {item.name}</td>
-                  <td style={{color: '#f43f5e', fontWeight: '600'}}>{item.stock}</td>
-                  <td>{item.reorder}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div style={{ overflowX: 'auto', width: '100%' }}>
+            <table className="table-light">
+              <thead><tr><th>Medicine Name</th><th>Current Stock</th><th>Reorder Level</th></tr></thead>
+              <tbody>
+                {lowStock.length === 0 ? (
+                  <tr><td colSpan="3" style={{ textAlign: 'center', color: '#94a3b8' }}>All stock above safety levels.</td></tr>
+                ) : (
+                  lowStock.map(item => (
+                    <tr key={item.id}>
+                      <td style={{color: '#00B4D8', fontWeight: '500'}}>💊 {item.name}</td>
+                      <td style={{color: '#f43f5e', fontWeight: '600'}}>{item.stock}</td>
+                      <td>{item.reorder}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
+      </div>
 
+      {/* ROW 3: QUICK ACTIONS & ALERTS */}
+      <div className="row-3-grid">
         {/* Quick Actions */}
         <div className="pharma-card">
-          <h3 style={{marginBottom: '1rem', fontSize: '1rem'}}>Quick Actions</h3>
+          <div className="card-header-row">
+            <h3>Rapid Pharmacy Actions</h3>
+            <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>One-click operational shortcuts</span>
+          </div>
           <div className="quick-actions-grid">
             <button className="qa-btn" onClick={() => navigate('/pharmacy/inventory')}><span className="qa-icon">+</span> Add Medicine</button>
             <button className="qa-btn" style={{color: '#22c55e'}} onClick={() => navigate('/pharmacy/inventory')}><span className="qa-icon">↻</span> Update Stock</button>
             <button className="qa-btn" style={{color: '#38bdf8'}} onClick={() => navigate('/pharmacy/online-orders')}><span className="qa-icon">🛒</span> Online Orders Hub</button>
-            <button className="qa-btn" style={{color: '#f97316'}} onClick={() => navigate('/pharmacy/suppliers')}><span className="qa-icon">🚚</span> Suppliers & POs</button>
+            <button className="qa-btn" style={{color: '#f97316'}} onClick={() => navigate('/pharmacy/suppliers')}><span className="qa-icon">🚚</span> Suppliers &amp; POs</button>
             <button className="qa-btn" style={{color: '#0ea5e9'}} onClick={() => navigate('/pharmacy/inventory')}><span className="qa-icon">[]</span> Scan Barcode</button>
             <button className="qa-btn" style={{color: '#f43f5e'}} onClick={() => navigate('/pharmacy/reports')}><span className="qa-icon">📊</span> Clinical Reports</button>
           </div>
@@ -228,28 +244,35 @@ const PharmacistDashboard = () => {
         {/* Alerts & Notifications */}
         <div className="pharma-card">
           <div className="card-header-row">
-            <h3>Alerts & Notifications</h3>
-            <button className="card-link" onClick={() => navigate('/pharmacy/notifications')}>View All</button>
+            <h3>Clinical Safety &amp; Inventory Alerts</h3>
+            <button className="card-link" onClick={() => navigate('/pharmacy/notifications')}>View All ›</button>
           </div>
           <div>
-            {alerts.map((alert, idx) => (
-              <div className="list-item" key={idx}>
-                <div className="list-icon" style={{background: alert.bg, color: alert.color}}>{alert.icon}</div>
-                <div className="list-content">
-                  <h4 style={{color: '#ffffff'}}>{alert.title}</h4>
-                  <p style={{color: '#94A3B8'}}>{alert.desc}</p>
+            {alerts.length === 0 ? (
+              <p style={{ textAlign: 'center', color: '#94a3b8', margin: '1rem 0' }}>No pending alerts.</p>
+            ) : (
+              alerts.map((alert, idx) => (
+                <div className="list-item" key={idx}>
+                  <div className="list-icon" style={{background: alert.bg, color: alert.color}}>{alert.icon}</div>
+                  <div className="list-content" style={{ flex: 1, minWidth: 0 }}>
+                    <h4 style={{color: '#ffffff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>{alert.title}</h4>
+                    <p style={{color: '#94A3B8', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>{alert.desc}</p>
+                  </div>
+                  <span className="list-meta">{alert.time}</span>
                 </div>
-                <span className="list-meta">{alert.time}</span>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>
 
-      {/* ROW 3 */}
-      <div className="row-3-grid">
+      {/* ROW 4: STOCK MOVEMENT & TOP CATEGORIES */}
+      <div className="row-4-grid">
         <div className="pharma-card">
-          <h3 style={{marginBottom: '1rem', fontSize: '1rem'}}>Stock Movement <span style={{color: '#94A3B8', fontSize: '0.8rem'}}>(This Month)</span></h3>
+          <div className="card-header-row">
+            <h3>Stock Movement Trajectory <span style={{color: '#94A3B8', fontSize: '0.8rem'}}>(This Month)</span></h3>
+            <span style={{ fontSize: '0.8rem', color: '#38bdf8', fontWeight: '600' }}>Active Dispensation</span>
+          </div>
           <div className="analytics-chart line-analytics pharmacist-chart tall">
             {stockMovementPoints.map((point, index) => (
               <span key={index} style={{ height: `${point}%` }} />
@@ -259,88 +282,113 @@ const PharmacistDashboard = () => {
 
         <div className="pharma-card">
           <div className="card-header-row">
-            <h3>Top Categories</h3>
-            <button className="card-link" onClick={() => navigate('/pharmacy/inventory')}>View All</button>
+            <h3>Top Therapeutic Categories</h3>
+            <button className="card-link" onClick={() => navigate('/pharmacy/inventory')}>View All ›</button>
           </div>
-          <table className="table-light">
-            <thead><tr><th>Category</th><th>Items</th><th>Stock (Units)</th></tr></thead>
-            <tbody>
-              {topCategories.map((cat, idx) => (
-                <tr key={idx}>
-                  <td style={{fontWeight: '500', color: '#ffffff'}}>{cat.category}</td>
-                  <td>{cat.items}</td>
-                  <td>
-                    <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-                      <span>{cat.stock}</span>
-                      <div style={{width: '60px', height: '6px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '3px'}}>
-                        <div style={{width: '60%', height: '100%', background: cat.color, borderRadius: '3px'}}></div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="pharma-card">
-          <div className="card-header-row">
-            <h3>Upcoming Expiry <span style={{color: '#94A3B8', fontSize: '0.8rem'}}>(Next 30 Days)</span></h3>
-            <button className="card-link" onClick={() => navigate('/pharmacy/monitoring')}>View All</button>
+          <div style={{ overflowX: 'auto', width: '100%' }}>
+            <table className="table-light">
+              <thead><tr><th>Category</th><th>Items</th><th>Stock (Units)</th></tr></thead>
+              <tbody>
+                {topCategories.length === 0 ? (
+                  <tr><td colSpan="3" style={{ textAlign: 'center', color: '#94a3b8' }}>Loading categories...</td></tr>
+                ) : (
+                  topCategories.map((cat, idx) => (
+                    <tr key={idx}>
+                      <td style={{fontWeight: '500', color: '#ffffff'}}>{cat.category}</td>
+                      <td>{cat.items}</td>
+                      <td>
+                        <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                          <span>{cat.stock}</span>
+                          <div style={{width: '60px', height: '6px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '3px'}}>
+                            <div style={{width: '60%', height: '100%', background: cat.color, borderRadius: '3px'}}></div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
           </div>
-          <table className="table-light">
-            <thead><tr><th>Medicine Name</th><th style={{textAlign: 'right'}}>Expiry Date</th></tr></thead>
-            <tbody>
-              {upcomingExpiry.map((med, idx) => (
-                <tr key={idx}>
-                  <td style={{color: '#f43f5e', fontWeight: '500'}}>📅 {med.name}</td>
-                  <td style={{textAlign: 'right'}}>{med.date}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
       </div>
 
-      {/* ROW 4 */}
-      <div className="row-4-grid">
+      {/* ROW 5: RECENT PURCHASES & UPCOMING EXPIRY */}
+      <div className="row-5-grid">
         <div className="pharma-card">
           <div className="card-header-row">
-            <h3>Recent Purchases</h3>
-            <button className="card-link" onClick={() => navigate('/pharmacy/suppliers')}>View All</button>
+            <h3>Recent Clinical Purchase Orders</h3>
+            <button className="card-link" onClick={() => navigate('/pharmacy/suppliers')}>View All ›</button>
           </div>
-          <table className="table-light">
-            <thead><tr><th>Order ID</th><th>Supplier Name</th><th>Order Date</th><th>Total Items</th><th>Total Amount</th><th>Status</th></tr></thead>
-            <tbody>
-              {recentPurchases.map((po, idx) => (
-                <tr key={idx}>
-                  <td style={{color: '#94A3B8'}}>{po.id}</td>
-                  <td style={{fontWeight: '500', color: '#ffffff'}}>{po.supplier}</td>
-                  <td>{po.date}</td>
-                  <td>{po.items}</td>
-                  <td>₹ {po.amount}</td>
-                  <td><span className={`status-pill ${po.style}`}>{po.status}</span></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div style={{ overflowX: 'auto', width: '100%' }}>
+            <table className="table-light">
+              <thead><tr><th>Order ID</th><th>Supplier Name</th><th>Order Date</th><th>Items</th><th>Amount</th><th>Status</th></tr></thead>
+              <tbody>
+                {recentPurchases.length === 0 ? (
+                  <tr><td colSpan="6" style={{ textAlign: 'center', color: '#94a3b8' }}>No purchase orders recorded.</td></tr>
+                ) : (
+                  recentPurchases.map((po, idx) => (
+                    <tr key={idx}>
+                      <td style={{color: '#94A3B8', fontFamily: 'monospace'}}>{po.id}</td>
+                      <td style={{fontWeight: '500', color: '#ffffff'}}>{po.supplier}</td>
+                      <td>{po.date}</td>
+                      <td>{po.items}</td>
+                      <td>₹ {po.amount}</td>
+                      <td><span className={`status-pill ${po.style}`}>{po.status}</span></td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div className="pharma-card">
           <div className="card-header-row">
-            <h3>Recent Activities</h3>
-            <button className="card-link" onClick={() => navigate('/pharmacy/reports')}>View All</button>
+            <h3>Upcoming FEFO Expiry <span style={{color: '#94A3B8', fontSize: '0.8rem'}}>(Next 30 Days)</span></h3>
+            <button className="card-link" onClick={() => navigate('/pharmacy/monitoring')}>View All ›</button>
           </div>
-          <div>
-            {recentActivities.map((act, idx) => (
-              <div className="list-item" key={idx} style={{padding: '12px 0'}}>
-                <div style={{width: '8px', height: '8px', borderRadius: '50%', background: act.color, marginTop: '6px'}}></div>
-                <div className="list-content" style={{flex: 1}}>
-                  <h4 style={{fontWeight: '500', color: '#CAF0F8'}}>{act.action}</h4>
+          <div style={{ overflowX: 'auto', width: '100%' }}>
+            <table className="table-light">
+              <thead><tr><th>Medicine Name</th><th style={{textAlign: 'right'}}>Expiry Date</th></tr></thead>
+              <tbody>
+                {upcomingExpiry.length === 0 ? (
+                  <tr><td colSpan="2" style={{ textAlign: 'center', color: '#94a3b8' }}>No items expiring in next 30 days.</td></tr>
+                ) : (
+                  upcomingExpiry.map((med, idx) => (
+                    <tr key={idx}>
+                      <td style={{color: '#f43f5e', fontWeight: '500'}}>📅 {med.name}</td>
+                      <td style={{textAlign: 'right'}}>{med.date}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      {/* ROW 6: RECENT ACTIVITIES (FULL WIDTH) */}
+      <div className="row-6-grid">
+        <div className="pharma-card">
+          <div className="card-header-row">
+            <h3>Recent Pharmacy Shift Activities &amp; Ledger</h3>
+            <button className="card-link" onClick={() => navigate('/pharmacy/reports')}>View Audit Log ›</button>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+            {recentActivities.length === 0 ? (
+              <p style={{ textAlign: 'center', color: '#94a3b8', gridColumn: '1 / -1' }}>No activities logged for this shift.</p>
+            ) : (
+              recentActivities.map((act, idx) => (
+                <div className="list-item" key={idx} style={{ padding: '10px 14px', background: 'rgba(255, 255, 255, 0.02)', borderRadius: '8px', border: '1px solid rgba(144, 224, 239, 0.08)' }}>
+                  <div style={{width: '8px', height: '8px', borderRadius: '50%', background: act.color, flexShrink: 0}}></div>
+                  <div className="list-content" style={{flex: 1, minWidth: 0}}>
+                    <h4 style={{fontWeight: '500', color: '#CAF0F8', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontSize: '0.85rem'}}>{act.action}</h4>
+                  </div>
+                  <span className="list-meta">{act.time}</span>
                 </div>
-                <span className="list-meta">{act.time}</span>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>

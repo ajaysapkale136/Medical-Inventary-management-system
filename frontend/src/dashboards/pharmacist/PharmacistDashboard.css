@@ -222,28 +222,31 @@
 /* --- SUMMARY GRID CARDS --- */
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: 1.25rem;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
   min-width: 0;
+  width: 100%;
 }
 
 .summary-box {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 14px;
-  padding: 1.3rem;
+  padding: 1.2rem;
   border-radius: 14px;
   background: linear-gradient(135deg, rgba(10, 25, 47, 0.65) 0%, rgba(3, 7, 18, 0.8) 100%);
   border: 1px solid rgba(144, 224, 239, 0.12);
   border-top: 1px solid rgba(144, 224, 239, 0.28);
   width: 100%;
+  min-height: 110px;
   backdrop-filter: blur(12px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
+  margin-bottom: 0 !important;
 }
 
 .summary-box::before {
@@ -294,15 +297,75 @@
   font-weight: 500;
 }
 
-/* STACKED GRIDS */
+/* --- DASHBOARD SECTION GRIDS (BALANCED & ALIGNED) --- */
 .row-2-grid,
-.row-3-grid,
+.row-3-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  align-items: stretch;
+}
+
 .row-4-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  align-items: stretch;
+}
+
+.row-5-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  align-items: stretch;
+}
+
+.row-6-grid {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.row-2-grid > .pharma-card,
+.row-3-grid > .pharma-card,
+.row-4-grid > .pharma-card,
+.row-5-grid > .pharma-card,
+.row-6-grid > .pharma-card {
+  margin-bottom: 0 !important;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  justify-content: space-between;
+}
+
+/* STAFF SPECIFIC GRIDS */
+.staff-dashboard-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
   width: 100%;
-  min-width: 0;
+}
+
+.staff-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  align-items: stretch;
+}
+
+.staff-split-grid > .pharma-card {
+  margin-bottom: 0 !important;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .clickable-card {
@@ -554,6 +617,20 @@
 }
 
 /* --- RESPONSIVE BREAKPOINTS --- */
+@media screen and (max-width: 1200px) {
+  .summary-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .row-2-grid,
+  .row-3-grid,
+  .row-4-grid,
+  .row-5-grid,
+  .staff-split-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media screen and (max-width: 1100px) {
   .staff-dashboard-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));

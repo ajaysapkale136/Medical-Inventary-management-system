@@ -220,7 +220,7 @@ function StaffDashboard() {
       </div>
 
       {/* 4 SUMMARY CARDS */}
-      <div className="summary-grid staff-dashboard-summary" style={{ marginBottom: '1.75rem' }}>
+      <div className="summary-grid staff-dashboard-summary">
         <button className="summary-box clickable-card" onClick={() => navigate('/staff/medicines')}>
           <div className="summary-icon" style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6' }}>💊</div>
           <div className="summary-info">
@@ -259,7 +259,7 @@ function StaffDashboard() {
       </div>
 
       {/* QUICK ACTIONS DECK */}
-      <div className="pharma-card" style={{ marginBottom: '1.75rem' }}>
+      <div className="pharma-card" style={{ marginBottom: '1.5rem' }}>
         <div className="card-header-row" style={{ marginBottom: '1rem' }}>
           <h3 style={{ margin: 0 }}>Shift Rapid Operations Deck</h3>
           <span style={{ color: '#94a3b8', fontSize: '0.82rem' }}>1-Click shortcut actions for floor operations</span>
@@ -319,7 +319,7 @@ function StaffDashboard() {
       </div>
 
       {/* TWO COLUMNS: SHIFT CHECKLIST & RECENT SHIFT ACTIVITIES */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1.5rem', marginBottom: '1.75rem' }}>
+      <div className="staff-split-grid">
         
         {/* Interactive Shift Checklist */}
         <div className="pharma-card">

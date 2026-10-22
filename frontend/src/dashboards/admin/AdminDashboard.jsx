@@ -91,69 +91,29 @@ const AdminDashboard = () => {
   return (
     <DashboardLayout title="Executive Command Center">
       {/* Top Header Row with Actions */}
-      <div className="page-title-row admin-page-heading" style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: '1rem',
-        marginBottom: '1.5rem'
-      }}>
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={{ 
-              fontSize: '0.75rem', 
-              fontWeight: '700', 
-              padding: '3px 10px', 
-              borderRadius: '20px', 
-              background: 'rgba(0, 180, 216, 0.15)', 
-              color: '#00B4D8',
-              letterSpacing: '0.05em',
-              textTransform: 'uppercase'
-            }}>
-              GxP Hospital Edition
-            </span>
-            <span style={{ color: '#64748B', fontSize: '0.8rem' }}>• Central Command v2.6</span>
+      <div className="admin-page-header">
+        <div className="admin-page-header-left">
+          <div className="admin-badge-strip">
+            <span className="badge-gxp">GxP Hospital Edition</span>
+            <span className="badge-subtext">• Central Command v2.6</span>
           </div>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: '800', marginTop: '4px', letterSpacing: '-0.02em' }}>
+          <h1 className="admin-page-title">
             Clinical Operations Command Center
           </h1>
-          <p style={{ color: '#94A3B8', fontSize: '0.9rem', margin: 0 }}>
+          <p className="admin-page-desc">
             Real-time pharmaceutical telemetry, FEFO batch quarantine, vendor lead times, and regulatory compliance.
           </p>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-          <div className="dashboard-date" style={{
-            background: 'rgba(255,255,255,0.03)',
-            padding: '8px 14px',
-            borderRadius: '8px',
-            border: '1px solid rgba(144, 224, 239, 0.12)',
-            color: '#CAF0F8',
-            fontSize: '0.85rem',
-            fontWeight: '600'
-          }}>
+        <div className="admin-page-header-actions">
+          <div className="dashboard-date-badge">
             📅 {displayDate}
           </div>
 
           <button
             onClick={handleReseedRealData}
             disabled={reseeding}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              background: reseeding ? 'rgba(99, 102, 241, 0.2)' : 'linear-gradient(135deg, #0284c7, #0369a1)',
-              color: '#ffffff',
-              border: '1px solid rgba(56, 189, 248, 0.4)',
-              padding: '8px 16px',
-              borderRadius: '8px',
-              fontWeight: '600',
-              fontSize: '0.85rem',
-              cursor: reseeding ? 'not-allowed' : 'pointer',
-              transition: 'all 0.2s ease',
-              boxShadow: '0 4px 12px rgba(2, 132, 199, 0.25)'
-            }}
+            className="btn-reseed-data"
             title="Populate authentic clinical medicines, top Indian & global manufacturers, real batches, and GxP stock logs"
           >
             <span>{reseeding ? "⏳" : "⚡"}</span>
@@ -162,16 +122,7 @@ const AdminDashboard = () => {
 
           <button
             onClick={() => navigate('/admin/purchases')}
-            style={{
-              background: 'rgba(16, 185, 129, 0.15)',
-              color: '#10b981',
-              border: '1px solid rgba(16, 185, 129, 0.3)',
-              padding: '8px 14px',
-              borderRadius: '8px',
-              fontWeight: '600',
-              fontSize: '0.85rem',
-              cursor: 'pointer'
-            }}
+            className="btn-create-po"
           >
             + Create Purchase Order
           </button>
@@ -197,54 +148,23 @@ const AdminDashboard = () => {
 
       {/* Clinical Expiry Alert Banner */}
       {expiryAlerts && (expiryAlerts.expiredCount > 0 || expiryAlerts.criticalCount > 0) && (
-        <div style={{
-          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(185, 28, 28, 0.22))',
-          border: '1px solid rgba(239, 68, 68, 0.6)',
-          borderRadius: '12px',
-          padding: '14px 20px',
-          marginBottom: '1.5rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '12px',
-          boxShadow: '0 4px 20px rgba(239, 68, 68, 0.2)'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <div style={{
-              width: '42px',
-              height: '42px',
-              borderRadius: '10px',
-              background: 'rgba(239, 68, 68, 0.2)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1.4rem'
-            }}>
+        <div className="admin-alert-banner">
+          <div className="alert-banner-left">
+            <div className="alert-banner-icon">
               🚨
             </div>
-            <div>
-              <strong style={{ color: '#fca5a5', display: 'block', fontSize: '0.98rem' }}>
+            <div className="alert-banner-text">
+              <strong>
                 GxP REGULATORY ALERT: {expiryAlerts.expiredCount} Batch Expired &amp; {expiryAlerts.criticalCount} Critical Batch(es) Expiring in &lt; 30 Days!
               </strong>
-              <span style={{ color: '#cbd5e1', fontSize: '0.84rem' }}>
+              <span>
                 Clinical Protocol: Expired batches (Ascoril LS) are quarantined. Near-expiry cold-chain insulins (Lantus) prioritized for FEFO dispensing.
               </span>
             </div>
           </div>
           <button
             onClick={() => navigate('/admin/expiry')}
-            style={{
-              background: '#ef4444',
-              color: '#ffffff',
-              border: 'none',
-              padding: '8px 18px',
-              borderRadius: '8px',
-              fontWeight: '700',
-              cursor: 'pointer',
-              fontSize: '0.85rem',
-              whiteSpace: 'nowrap'
-            }}
+            className="btn-quarantine-review"
           >
             Quarantine &amp; Review ›
           </button>
@@ -254,67 +174,62 @@ const AdminDashboard = () => {
       {error && <div className="page-loading" style={{ color: '#f87171' }}>{error}</div>}
 
       {/* 5-Column Executive Stat Strip */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
-        gap: '1.25rem',
-        marginBottom: '1.75rem'
-      }}>
+      <div className="admin-stats-grid">
         {/* Card 1: Medicines */}
-        <button className="glass-panel clickable-card" onClick={() => navigate('/admin/medicines')} style={{ padding: '1.25rem' }}>
+        <button className="glass-panel clickable-card admin-stat-card" onClick={() => navigate('/admin/medicines')}>
           <div className="stat-top">
             <span>Clinical Formulations</span>
             <div className="stat-icon icon-blue">💊</div>
           </div>
-          <h3 className="stat-val" style={{ fontSize: '1.9rem', marginTop: '6px' }}>
+          <h3 className="stat-val">
             {loading ? "..." : stats.medicineCount.toLocaleString()}
           </h3>
           <span className="stat-sub text-green">10 Active Categories</span>
         </button>
 
         {/* Card 2: Total Units In Hand */}
-        <button className="glass-panel clickable-card" onClick={() => navigate('/admin/inventory')} style={{ padding: '1.25rem' }}>
+        <button className="glass-panel clickable-card admin-stat-card" onClick={() => navigate('/admin/inventory')}>
           <div className="stat-top">
             <span>Physical Stock Units</span>
             <div className="stat-icon icon-green">📦</div>
           </div>
-          <h3 className="stat-val" style={{ fontSize: '1.9rem', marginTop: '6px' }}>
+          <h3 className="stat-val">
             {loading ? "..." : stats.totalStock ? stats.totalStock.toLocaleString() : "8,430"}
           </h3>
           <span className="stat-sub text-green">Main Whse &amp; Cold-Chain</span>
         </button>
 
         {/* Card 3: Inventory Valuation */}
-        <button className="glass-panel clickable-card" onClick={() => navigate('/admin/reports')} style={{ padding: '1.25rem' }}>
+        <button className="glass-panel clickable-card admin-stat-card" onClick={() => navigate('/admin/reports')}>
           <div className="stat-top">
             <span>Total Valuation</span>
             <div className="stat-icon icon-blue" style={{ background: 'rgba(99, 102, 241, 0.15)', borderColor: 'rgba(99, 102, 241, 0.3)' }}>💰</div>
           </div>
-          <h3 className="stat-val" style={{ fontSize: '1.6rem', marginTop: '6px', color: '#93c5fd' }}>
+          <h3 className="stat-val" style={{ color: '#93c5fd' }}>
             {loading ? "..." : stats.totalValue || "₹24,85,920"}
           </h3>
           <span className="stat-sub text-green">↑ 8.4% Asset Growth</span>
         </button>
 
         {/* Card 4: Low Stock Alert */}
-        <button className="glass-panel clickable-card" onClick={() => navigate('/admin/inventory')} style={{ padding: '1.25rem' }}>
+        <button className="glass-panel clickable-card admin-stat-card" onClick={() => navigate('/admin/inventory')}>
           <div className="stat-top">
             <span>Low Stock Hazards</span>
             <div className="stat-icon icon-orange">⚠️</div>
           </div>
-          <h3 className="stat-val" style={{ fontSize: '1.9rem', marginTop: '6px', color: '#fbbf24' }}>
+          <h3 className="stat-val" style={{ color: '#fbbf24' }}>
             {loading ? "..." : stats.lowStock}
           </h3>
           <span className="stat-sub text-orange">Immediate PO Required</span>
         </button>
 
         {/* Card 5: Expired / Near Expiry */}
-        <button className="glass-panel clickable-card" onClick={() => navigate('/admin/expiry')} style={{ padding: '1.25rem' }}>
+        <button className="glass-panel clickable-card admin-stat-card" onClick={() => navigate('/admin/expiry')}>
           <div className="stat-top">
             <span>Expired / Critical</span>
             <div className="stat-icon icon-red">⌛</div>
           </div>
-          <h3 className="stat-val" style={{ fontSize: '1.9rem', marginTop: '6px', color: '#f87171' }}>
+          <h3 className="stat-val" style={{ color: '#f87171' }}>
             {loading ? "..." : stats.expired}
           </h3>
           <span className="stat-sub text-red">Quarantined Stock</span>
@@ -322,27 +237,20 @@ const AdminDashboard = () => {
       </div>
 
       {/* Visual Telemetry Charts Grid */}
-      <div className="charts-grid" style={{ marginBottom: '1.75rem' }}>
+      <div className="charts-grid">
         {/* Monthly Inventory Valuation & Consumption Trajectory */}
-        <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+        <div className="glass-panel">
+          <div className="panel-header-row">
             <div>
-              <h3 className="panel-header" style={{ margin: 0 }}>Monthly Inventory Valuation &amp; Consumption Trajectory</h3>
-              <span style={{ color: '#94a3b8', fontSize: '0.82rem' }}>12-month inpatient dispensing and procurement curve (Indexed)</span>
+              <h3 className="panel-header">Monthly Inventory Valuation &amp; Consumption Trajectory</h3>
+              <span className="panel-subtitle">12-month inpatient dispensing and procurement curve (Indexed)</span>
             </div>
-            <span style={{ 
-              background: 'rgba(34, 197, 94, 0.12)', 
-              color: '#4ade80', 
-              fontSize: '0.78rem', 
-              padding: '4px 10px', 
-              borderRadius: '6px',
-              fontWeight: '600'
-            }}>
+            <span className="stat-badge-green">
               98.2% Supply Continuity
             </span>
           </div>
 
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', minHeight: '190px' }}>
+          <div className="chart-body-bar">
             <div style={{ 
               display: 'flex', 
               alignItems: 'flex-end', 
@@ -393,36 +301,30 @@ const AdminDashboard = () => {
         </div>
 
         {/* Real-Time Stock Movement Telemetry */}
-        <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column' }}>
-          <h3 className="panel-header" style={{ marginBottom: '0.25rem' }}>Stock Telemetry Distribution</h3>
-          <span style={{ color: '#94a3b8', fontSize: '0.82rem', marginBottom: '1.25rem' }}>Real-time inward GRN vs hospital dispensing</span>
+        <div className="glass-panel">
+          <div className="panel-header-row">
+            <div>
+              <h3 className="panel-header">Stock Telemetry Distribution</h3>
+              <span className="panel-subtitle">Real-time inward GRN vs hospital dispensing</span>
+            </div>
+          </div>
 
-          <div className="donut-analytics" style={{ flex: 1, alignItems: 'center' }}>
-            <div
-              className="donut-ring"
-              style={{
-                width: '140px',
-                height: '140px',
-                background: `conic-gradient(#10B981 0% ${stockMovement.stockInPct}%, #00B4D8 ${stockMovement.stockInPct}% ${stockMovement.stockInPct + stockMovement.stockOutPct}%, #F59E0B ${stockMovement.stockInPct + stockMovement.stockOutPct}% 100%)`,
-                boxShadow: '0 0 20px rgba(0, 180, 216, 0.15)'
-              }}
-            >
-              <div style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '85px',
-                height: '85px',
-                borderRadius: '50%',
-                background: '#010409',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase' }}>Active Flow</span>
-                <span style={{ fontSize: '1rem', fontWeight: '800', color: '#ffffff' }}>100%</span>
+          <div className="chart-body-donut">
+            <div className="donut-ring-container">
+              <div
+                className="donut-ring"
+                style={{
+                  width: '140px',
+                  height: '140px',
+                  background: `conic-gradient(#10B981 0% ${stockMovement.stockInPct}%, #00B4D8 ${stockMovement.stockInPct}% ${stockMovement.stockInPct + stockMovement.stockOutPct}%, #F59E0B ${stockMovement.stockInPct + stockMovement.stockOutPct}% 100%)`,
+                  boxShadow: '0 0 20px rgba(0, 180, 216, 0.15)',
+                  position: 'relative'
+                }}
+              >
+                <div className="donut-center-circle">
+                  <span className="donut-center-sub">Active Flow</span>
+                  <span className="donut-center-val">100%</span>
+                </div>
               </div>
             </div>
 
@@ -454,22 +356,24 @@ const AdminDashboard = () => {
       </div>
 
       {/* Two-Column Operations Section: Critical Expiry & Low Stock */}
-      <div className="tables-split" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1.5rem', marginBottom: '1.75rem' }}>
+      <div className="tables-split">
         
         {/* Expiring Batches Table */}
         <div className="glass-panel">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <h3 className="panel-header" style={{ margin: 0 }}>Clinical Batch Expiry &amp; FEFO Queue</h3>
+          <div className="panel-header-row">
+            <div>
+              <h3 className="panel-header">Clinical Batch Expiry &amp; FEFO Queue</h3>
+              <span className="panel-subtitle">Quarantine status &amp; priority dispensing</span>
+            </div>
             <button 
               className="card-link" 
               onClick={() => navigate('/admin/expiry')}
-              style={{ background: 'none', border: 'none', color: '#00B4D8', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '600' }}
             >
               All Batches ›
             </button>
           </div>
-          <div className="table-responsive">
-            <table className="data-table">
+          <div className="table-responsive-compact">
+            <table className="dashboard-compact-table">
               <thead>
                 <tr>
                   <th>Medicine</th>
@@ -532,18 +436,20 @@ const AdminDashboard = () => {
 
         {/* Low Stock Reorder Queue */}
         <div className="glass-panel">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <h3 className="panel-header" style={{ margin: 0 }}>Critical Low Stock &amp; Reorder Queue</h3>
+          <div className="panel-header-row">
+            <div>
+              <h3 className="panel-header">Critical Low Stock &amp; Reorder Queue</h3>
+              <span className="panel-subtitle">Replenishment needed below safety threshold</span>
+            </div>
             <button 
               className="card-link" 
               onClick={() => navigate('/admin/inventory')}
-              style={{ background: 'none', border: 'none', color: '#00B4D8', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '600' }}
             >
               All Inventory ›
             </button>
           </div>
-          <div className="table-responsive">
-            <table className="data-table">
+          <div className="table-responsive-compact">
+            <table className="dashboard-compact-table">
               <thead>
                 <tr>
                   <th>Medicine</th>
@@ -600,64 +506,42 @@ const AdminDashboard = () => {
 
       {/* Real-time GxP Audit Log Feed */}
       <div className="glass-panel">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+        <div className="panel-header-row">
           <div>
-            <h3 className="panel-header" style={{ margin: 0 }}>Live GxP Inventory Audit &amp; Movement Stream</h3>
-            <span style={{ color: '#94a3b8', fontSize: '0.82rem' }}>Traceable ledger records for clinical compliance, dispensations, and inward receipts</span>
+            <h3 className="panel-header">Live GxP Inventory Audit &amp; Movement Stream</h3>
+            <span className="panel-subtitle">Traceable ledger records for clinical compliance, dispensations, and inward receipts</span>
           </div>
           <button 
             className="card-link" 
             onClick={() => navigate('/admin/reports')}
-            style={{ background: 'none', border: 'none', color: '#00B4D8', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '600' }}
           >
             Export Compliance Report ›
           </button>
         </div>
 
-        <div className="activity-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+        <div className="admin-activity-grid">
           {loading ? (
-            <p style={{ textAlign: 'center', color: '#94A3B8' }}>Loading activity logs...</p>
+            <p style={{ textAlign: 'center', color: '#94A3B8', gridColumn: '1 / -1' }}>Loading activity logs...</p>
           ) : activities.length === 0 ? (
-            <p style={{ textAlign: 'center', color: '#94A3B8' }}>No recorded movements in this shift.</p>
+            <p style={{ textAlign: 'center', color: '#94A3B8', gridColumn: '1 / -1' }}>No recorded movements in this shift.</p>
           ) : (
             activities.map(activity => (
               <div 
-                className="activity-item" 
+                className="admin-activity-card" 
                 key={activity.id}
-                style={{
-                  background: 'rgba(255, 255, 255, 0.02)',
-                  border: '1px solid rgba(144, 224, 239, 0.08)',
-                  borderRadius: '10px',
-                  padding: '12px 16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px'
-                }}
               >
-                <div style={{
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '8px',
-                  background: 'rgba(0, 180, 216, 0.12)',
-                  color: '#38bdf8',
-                  border: '1px solid rgba(0, 180, 216, 0.25)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '1rem',
-                  fontWeight: '700'
-                }}>
+                <div className="activity-icon-badge">
                   {activity.title?.includes("Out") ? "↓" : activity.title?.includes("In") ? "↑" : "⟲"}
                 </div>
-                <div className="activity-info" style={{ flex: 1, minWidth: 0 }}>
-                  <h4 style={{ margin: '0 0 3px', fontSize: '0.88rem', color: '#ffffff', fontWeight: '600', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <h4 className="activity-title-text">
                     {activity.title}
                   </h4>
-                  <p style={{ margin: 0, fontSize: '0.78rem', color: '#94a3b8', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <p className="activity-desc-text">
                     {activity.desc}
                   </p>
                 </div>
-                <div className="activity-time" style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '600', whiteSpace: 'nowrap' }}>
+                <div className="activity-time-badge">
                   {activity.time}
                 </div>
               </div>
