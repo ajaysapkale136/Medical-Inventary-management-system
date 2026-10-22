@@ -1,4 +1,5 @@
 const SESSION_USER_KEY = "medicalInventoryUser";
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/+$/, "");
 
 export class ApiError extends Error {
   constructor(message, status, body) {
@@ -10,11 +11,12 @@ export class ApiError extends Error {
 }
 
 export async function apiRequest(path, options = {}) {
+  const targetUrl = path.startsWith("http") ? path : `${API_BASE_URL}${path}`;
   const hasBody = options.body !== undefined && options.body !== null;
   const requestBody = hasBody && typeof options.body !== "string"
     ? JSON.stringify(options.body)
     : options.body;
-  const response = await fetch(path, {
+  const response = await fetch(targetUrl, {
     credentials: "include",
     ...options,
     body: requestBody,
@@ -69,7 +71,8 @@ export async function signOut() {
 }
 
 export async function downloadFile(path, defaultFilename = "report.pdf") {
-  const response = await fetch(path, {
+  const targetUrl = path.startsWith("http") ? path : `${API_BASE_URL}${path}`;
+  const response = await fetch(targetUrl, {
     credentials: "include",
   });
 
