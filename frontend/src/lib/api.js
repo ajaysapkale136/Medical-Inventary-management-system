@@ -1,5 +1,7 @@
 const SESSION_USER_KEY = "medicalInventoryUser";
 const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/+$/, "");
+const GET_CACHE_TTL_MS = 30_000;
+const getCache = new Map();
 
 export class ApiError extends Error {
   constructor(message, status, body) {
@@ -12,11 +14,16 @@ export class ApiError extends Error {
 
 export async function apiRequest(path, options = {}) {
   const targetUrl = path.startsWith("http") ? path : `${API_BASE_URL}${path}`;
+  const method = (options.method || "GET").toUpperCase();
+  const cached = getCache.get(targetUrl);
+  if (method === "GET" && cached && Date.now() - cached.createdAt < GET_CACHE_TTL_MS) {
+    return cached.promise;
+  }
   const hasBody = options.body !== undefined && options.body !== null;
   const requestBody = hasBody && typeof options.body !== "string"
     ? JSON.stringify(options.body)
     : options.body;
-  const response = await fetch(targetUrl, {
+  const request = fetch(targetUrl, {
     credentials: "include",
     ...options,
     body: requestBody,
@@ -24,25 +31,31 @@ export async function apiRequest(path, options = {}) {
       ...(hasBody ? { "Content-Type": "application/json" } : {}),
       ...options.headers,
     },
+  }).then(async (response) => {
+
+    const isJson = response.headers.get("content-type")?.includes("application/json");
+    const responseBody = isJson ? await response.json() : null;
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        clearSessionUser();
+      }
+      const message = responseBody?.message
+        || responseBody?.error
+        || (response.status === 401 ? "Incorrect email or password." : null)
+        || (response.status === 403 ? "Access denied. Your account is inactive or lacks permissions." : null)
+        || (response.status >= 500 ? `Server connection error (HTTP ${response.status}). Database or server may be starting up.` : null)
+        || `Request failed (HTTP ${response.status})`;
+      throw new ApiError(message, response.status, responseBody);
+    }
+    return responseBody;
   });
 
-  const isJson = response.headers.get("content-type")?.includes("application/json");
-  const responseBody = isJson ? await response.json() : null;
-
-  if (!response.ok) {
-    if (response.status === 401) {
-      clearSessionUser();
-    }
-    const message = responseBody?.message
-      || responseBody?.error
-      || (response.status === 401 ? "Incorrect email or password." : null)
-      || (response.status === 403 ? "Access denied. Your account is inactive or lacks permissions." : null)
-      || (response.status >= 500 ? `Server connection error (HTTP ${response.status}). Database or server may be starting up.` : null)
-      || `Request failed (HTTP ${response.status})`;
-    throw new ApiError(message, response.status, responseBody);
+  if (method === "GET") {
+    getCache.set(targetUrl, { createdAt: Date.now(), promise: request });
+    request.catch(() => getCache.delete(targetUrl));
   }
-
-  return responseBody;
+  return request;
 }
 
 export function getSessionUser() {

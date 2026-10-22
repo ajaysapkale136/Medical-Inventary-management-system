@@ -222,6 +222,12 @@
   box-sizing: border-box;
 }
 
+/* Pages are direct children of this column. Never let flexbox compress cards,
+   filters, or tables to fit the viewport; the container itself must scroll. */
+.dashboard-content > * {
+  flex: 0 0 auto;
+}
+
 .dashboard-title {
   margin: 0 0 1rem 0;
   font-size: 1.6rem;
