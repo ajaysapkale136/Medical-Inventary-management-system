@@ -31,7 +31,13 @@ export async function apiRequest(path, options = {}) {
     if (response.status === 401) {
       clearSessionUser();
     }
-    throw new ApiError(responseBody?.message || "The request could not be completed", response.status, responseBody);
+    const message = responseBody?.message
+      || responseBody?.error
+      || (response.status === 401 ? "Incorrect email or password." : null)
+      || (response.status === 403 ? "Access denied. Your account is inactive or lacks permissions." : null)
+      || (response.status >= 500 ? `Server connection error (HTTP ${response.status}). Database or server may be starting up.` : null)
+      || `Request failed (HTTP ${response.status})`;
+    throw new ApiError(message, response.status, responseBody);
   }
 
   return responseBody;

@@ -37,9 +37,12 @@ public class ApiExceptionHandler {
         int status = normalized.contains("not found") ? HttpStatus.NOT_FOUND.value()
                 : normalized.contains("already") || normalized.contains("duplicate")
                 ? HttpStatus.CONFLICT.value() : HttpStatus.BAD_REQUEST.value();
-        return error(status, status == HttpStatus.BAD_REQUEST.value()
-                ? "Request could not be completed"
-                : message);
+        return error(status, message);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, Object>> handleGeneral(Exception exception) {
+        return error(HttpStatus.INTERNAL_SERVER_ERROR.value(), message(exception, "An unexpected server error occurred"));
     }
 
     private ResponseEntity<Map<String, Object>> error(int status, String message) {
