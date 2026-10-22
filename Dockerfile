@@ -28,6 +28,7 @@ COPY --from=builder /build/target/demo-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 
 ENV SERVER_ADDRESS=0.0.0.0 \
-    PORT=8080
+    PORT=8080 \
+    JAVA_TOOL_OPTIONS="-XX:+UseSerialGC -Xss512k -XX:MaxRAMPercentage=75.0"
 
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
