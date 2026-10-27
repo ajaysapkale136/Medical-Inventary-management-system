@@ -1,6 +1,7 @@
 package com.v.medical.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,14 +29,17 @@ public class HealthController {
         status.put("service", "MediStock Medical Inventory API");
         status.put("timestamp", Instant.now().toString());
 
+        boolean databaseConnected = false;
         try (Connection conn = dataSource.getConnection()) {
             boolean dbConnected = conn.isValid(3);
+            databaseConnected = dbConnected;
             status.put("database", dbConnected ? "CONNECTED" : "UNREACHABLE");
             status.put("databaseType", conn.getMetaData().getDatabaseProductName());
         } catch (Exception e) {
-            status.put("database", "DISCONNECTED: " + e.getMessage());
+            status.put("database", "DISCONNECTED");
         }
 
-        return ResponseEntity.ok(status);
+        return ResponseEntity.status(databaseConnected ? HttpStatus.OK : HttpStatus.SERVICE_UNAVAILABLE)
+                .body(status);
     }
 }

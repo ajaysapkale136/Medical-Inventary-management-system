@@ -1,7 +1,7 @@
 services:
   - type: web
     name: medical-inventory-management
-    env: docker
+    runtime: docker
     dockerfilePath: ./Dockerfile
     plan: free
     branch: main
