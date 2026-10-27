@@ -50,11 +50,26 @@ public class DatabaseConfiguration {
 
         String username = resolveFirstNonEmpty(envDbUsername, configuredUsername);
         String password = resolveFirstNonEmpty(envDbPassword, configuredPassword);
-        if (username.isEmpty() || password.isEmpty()) {
-            throw new IllegalStateException("Database credentials are missing. Set DB_USERNAME and DB_PASSWORD before starting the application.");
+        ParsedDbInfo parsed = parseDatabaseInfo(rawUrl, username, password);
+
+        if (parsed.username == null || parsed.username.isEmpty() || parsed.password == null || parsed.password.isEmpty()) {
+            throw new IllegalStateException("Database credentials are missing. Set DB_USERNAME and DB_PASSWORD (or include user:password in DB_URL / DATABASE_URL) before starting the application.");
         }
 
-        ParsedDbInfo parsed = parseDatabaseInfo(rawUrl, username, password);
+        if ("replace-with-database-user".equalsIgnoreCase(parsed.username)) {
+            throw new IllegalStateException("Database user is still set to placeholder 'replace-with-database-user'. " +
+                    "Please provide real database credentials in your Render environment variables.");
+        }
+
+        if ((parsed.jdbcUrl.contains("localhost") || parsed.jdbcUrl.contains("127.0.0.1"))
+                && (System.getenv("RENDER") != null || System.getenv("PORT") != null)) {
+            log.error("❌ CRITICAL CONFIGURATION ERROR: Attempting to connect to '{}' inside a cloud container. " +
+                    "Render containers do not run a local MySQL/PostgreSQL server. " +
+                    "You must provide a remote cloud database URL in DB_URL or DATABASE_URL (e.g. Aiven MySQL, TiDB Cloud, or Render PostgreSQL).",
+                    parsed.sanitizedJdbcUrl);
+        }
+
+        System.setProperty("jakarta.persistence.jdbc.url", parsed.jdbcUrl);
 
         log.info("Configuring DataSource with JDBC URL: {} and User: {}", parsed.sanitizedJdbcUrl, parsed.username);
 
