@@ -405,6 +405,30 @@
 }
 
 @media screen and (max-width: 768px) {
+  .medistock-navbar {
+    min-height: 64px;
+    padding: 0.75rem 1rem;
+  }
+
+  .navbar-title-group {
+    gap: 0;
+  }
+
+  .navbar-sub-tag,
+  .btn-register-nav {
+    display: none;
+  }
+
+  .navbar-actions {
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+
+  .btn-login-nav {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
   .navbar-mobile-toggle {
     display: block;
   }
@@ -437,3 +461,17 @@
     text-align: center;
   }
 }
+@media screen and (max-width: 390px) {
+  .navbar-logo-badge {
+    width: 34px;
+    height: 34px;
+  }
+
+  .navbar-brand {
+    gap: 8px;
+  }
+
+  .navbar-logo-text {
+    font-size: 1.15rem;
+  }
+}

@@ -43,15 +43,15 @@ public class DatabaseConfiguration {
     @Bean
     @Primary
     public DataSource dataSource() {
-        String rawUrl = resolveFirstNonEmpty(envDbUrl, envDatabaseUrl, configuredUrl,
-                "jdbc:mysql://localhost:3306/medical_inventory");
+        String rawUrl = resolveFirstNonEmpty(envDbUrl, envDatabaseUrl, configuredUrl);
+        if (rawUrl.isEmpty()) {
+            throw new IllegalStateException("Database configuration is missing. Set DB_URL (or DATABASE_URL) before starting the application.");
+        }
 
-        String username = resolveFirstNonEmpty(envDbUsername, configuredUsername, "avnadmin");
+        String username = resolveFirstNonEmpty(envDbUsername, configuredUsername);
         String password = resolveFirstNonEmpty(envDbPassword, configuredPassword);
-
-        // If target is Aiven Cloud MySQL and password was left unset or default placeholder
-        if ((password.isEmpty() || "1234".equals(password)) && rawUrl.contains("aivencloud.com")) {
-            password = new String(java.util.Base64.getDecoder().decode("QVZOU19ZUER5cTFPYlJFcjNfWElpYjNf"));
+        if (username.isEmpty() || password.isEmpty()) {
+            throw new IllegalStateException("Database credentials are missing. Set DB_USERNAME and DB_PASSWORD before starting the application.");
         }
 
         ParsedDbInfo parsed = parseDatabaseInfo(rawUrl, username, password);

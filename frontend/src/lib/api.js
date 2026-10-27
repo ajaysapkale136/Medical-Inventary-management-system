@@ -1,6 +1,7 @@
 const SESSION_USER_KEY = "medicalInventoryUser";
 const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/+$/, "");
 const GET_CACHE_TTL_MS = 30_000;
+const REQUEST_TIMEOUT_MS = 60_000;
 const getCache = new Map();
 
 export class ApiError extends Error {
@@ -23,10 +24,13 @@ export async function apiRequest(path, options = {}) {
   const requestBody = hasBody && typeof options.body !== "string"
     ? JSON.stringify(options.body)
     : options.body;
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   const request = fetch(targetUrl, {
     credentials: "include",
     ...options,
     body: requestBody,
+    signal: options.signal || controller.signal,
     headers: {
       ...(hasBody ? { "Content-Type": "application/json" } : {}),
       ...options.headers,
@@ -49,7 +53,12 @@ export async function apiRequest(path, options = {}) {
       throw new ApiError(message, response.status, responseBody);
     }
     return responseBody;
-  });
+  }).catch((error) => {
+    if (error.name === "AbortError") {
+      throw new ApiError("The server did not respond within one minute. Check the Render service and database settings.", 504);
+    }
+    throw error;
+  }).finally(() => window.clearTimeout(timeout));
 
   if (method === "GET") {
     getCache.set(targetUrl, { createdAt: Date.now(), promise: request });

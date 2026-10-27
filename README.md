@@ -70,16 +70,11 @@ Compose uses a named MySQL volume. Do not run `docker compose down -v` against a
 
 This project contains a multi-stage `Dockerfile` and a `render.yaml` Blueprint ready for deployment on [Render](https://render.com).
 
-### Live Aiven Cloud Database Configuration
-The application is pre-configured to connect to your live Aiven MySQL cloud instance:
-- **Host:** `mysql-3c3756e4-medical-mannagement.c.aivencloud.com`
-- **Port:** `12923`
-- **Database:** `defaultdb`
-- **User:** `avnadmin`
-- **Password:** Set in Render environment variables
-- **JDBC URL:** `jdbc:mysql://mysql-3c3756e4-medical-mannagement.c.aivencloud.com:12923/defaultdb?sslMode=REQUIRED&allowPublicKeyRetrieval=true`
-
-*(The backend also includes an automatic URI parser: you can provide either `jdbc:mysql://...` or standard URI `mysql://avnadmin:<password>@mysql-3c3756e4-medical-mannagement.c.aivencloud.com:12923/defaultdb?ssl-mode=REQUIRED`)*
+### Database Configuration
+Set the database connection values in Render. They are intentionally not stored in this repository.
+`DB_URL` accepts either a JDBC URL such as `jdbc:mysql://host:3306/database?sslMode=REQUIRED`
+or a standard database URI. The service fails at startup with a clear error if these
+values are missing, instead of serving a permanently loading dashboard.
 
 ### Step-by-step:
 1. Go to [Render Dashboard](https://dashboard.render.com).
@@ -87,14 +82,30 @@ The application is pre-configured to connect to your live Aiven MySQL cloud inst
 3. Connect your GitHub repository: `ajaysapkale136/Medical-Inventary-management-system`.
 4. Choose **Docker** as the Runtime (Render automatically detects `./Dockerfile`).
 5. Configure Environment Variables in the Render settings:
-   - `PORT`: `8080`
    - `SERVER_ADDRESS`: `0.0.0.0`
-   - `DB_URL`: `jdbc:mysql://mysql-3c3756e4-medical-mannagement.c.aivencloud.com:12923/defaultdb?sslMode=REQUIRED&allowPublicKeyRetrieval=true`
-   - `DB_USERNAME`: `avnadmin`
-   - `DB_PASSWORD`: `<your_aiven_password>`
+   - `DB_URL`: your production JDBC database URL
+   - `DB_USERNAME`: your production database user
+   - `DB_PASSWORD`: your production database password
    - `DDL_AUTO`: `update`
    - `CORS_ALLOWED_ORIGINS`: `*`
-6. Click **Create Web Service**. Render builds the React frontend, packages the Spring Boot JAR, connects to Aiven, seeds default users, and serves the live application.
+6. Click **Create Web Service**. Render builds the packaged frontend and Spring Boot WAR, then serves the live application.
+
+## Deploy the frontend on Vercel
+
+The Java backend cannot run as a normal Vercel static deployment. Deploy it as the
+Render service above, then deploy the `frontend` directory as a separate Vercel
+project.
+
+1. In Vercel, set **Root Directory** to `frontend` and use the Vite framework preset.
+2. In **Settings → Environment Variables**, add `BACKEND_URL` with the public base
+   URL of the Render service, for example `https://medistock-api.onrender.com`.
+   Do not include `/api`, and do not expose this as a `VITE_` variable.
+3. Redeploy the Vercel project.
+
+`frontend/api/proxy.js` forwards `/api/*` through the Vercel origin to that backend.
+This preserves the first-party session cookie required by the current login flow.
+If `BACKEND_URL` is absent, `/api/*` now returns an explicit configuration error
+instead of failing against a fake hostname.
 
 ## Dashboard Login Credentials
 
